@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Study Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14171f;
+    --surface: #1c2029;
+    --surface-2: #232833;
+    --line: #333a48;
+    --paper: #f4eee0;
+    --paper-2: #ece4d0;
+    --amber: #e3a23c;
+    --amber-soft: rgba(227, 162, 60, 0.14);
+    --sage: #8aa583;
+    --coral: #d97a6c;
+    --text: #ece8dc;
+    --text-muted: #9298a6;
+    --ink-text: #2a2418;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  .app {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: 100vh;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--line);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .brand {
+    position: relative;
+  }
+
+  .brand-glow {
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(227,162,60,0.35), transparent 70%);
+    filter: blur(10px);
+    animation: pulse 5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+
+  .brand h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 500;
+    margin: 0;
+    position: relative;
+  }
+
+  .brand p {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    margin: 6px 0 0;
+    line-height: 1.5;
+    position: relative;
+  }
+
+  .upload-zone {
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--amber);
+    background: var(--amber-soft);
+  }
+
+  .upload-zone p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .upload-zone .icon {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .doc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .doc-list-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .doc-item {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    border: 1px solid var(--line);
+  }
+
+  .doc-item .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .doc-item .chunks {
+    color: var(--sage);
+    font-size: 11.5px;
+    white-space: nowrap;
+  }
+
+  .empty-note {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  .clear-btn {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--text-muted);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .clear-btn:hover {
+    border-color: var(--coral);
+    color: var(--coral);
+  }
+
+  /* ---------- Main ---------- */
+  .main {
+    padding: 32px 44px;
+    display: flex;
+    flex-direction: column;
+    max-width: 880px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 28px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 28px;
+  }
+
+  .tab {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+    font-weight: 500;
+    padding: 10px 2px 14px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .tab.active {
+    color: var(--text);
+    border-bottom-color: var(--amber);
+  }
+
+  .panel { display: none; flex-direction: column; gap: 18px; }
+  .panel.active { display: flex; }
+
+  /* Ask panel */
+  .chat-log {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 200px;
+  }
+
+  .qa-block { display: flex; flex-direction: column; gap: 10px; }
+
+  .q-bubble {
+    align-self: flex-end;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    border-radius: 10px 10px 2px 10px;
+    font-size: 14px;
+    max-width: 80%;
+  }
+
+  .a-bubble {
+    background: var(--paper);
+    color: var(--ink-text);
+    padding: 16px 18px;
+    border-radius: 2px 10px 10px 10px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    max-width: 90%;
+    white-space: pre-wrap;
+  }
+
+  .a-sources {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .ask-input-row {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+  }
+
+  input[type=text], textarea {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    flex: 1;
+  }
+
+  input[type=text]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--amber);
+  }
+
+  button.primary {
+    background: var(--amber);
+    color: #201502;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+  }
+
+  button.primary:hover { filter: brightness(1.08); }
+  button.primary:disabled { opacity: 0.5; cursor: default; }
+
+  /* Summary panel */
+  .summary-box {
+    background: var(--paper);
+    color: var(--ink-text);
+    border-radius: 10px;
+    padding: 26px 28px;
+    font-size: 14.5px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+
+  /* Quiz panel */
+  .quiz-controls { display: flex; align-items: center; gap: 12px; }
+  .quiz-controls label { font-size: 13.5px; color: var(--text-muted); }
+  select {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 10px;
+    font-family: inherit;
+  }
+
+  .quiz-card {
+    background: var(--paper);
+    color: var(--ink-text);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+
+  .quiz-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 17px;
+    margin: 0 0 14px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 7px;
+    border: 1px solid var(--paper-2);
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 13.5px;
+    transition: background 0.12s ease;
+  }
+
+  .option:hover { background: var(--paper-2); }
+  .option.correct { background: rgba(138,165,131,0.35); border-color: var(--sage); }
+  .option.wrong { background: rgba(217,122,108,0.3); border-color: var(--coral); }
+
+  .explanation {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #5a5138;
+    display: none;
+  }
+
+  .placeholder {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  .status-msg {
+    font-size: 13px;
+    color: var(--amber);
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-glow"></div>
+      <h1>Study Assistant</h1>
+      <p>Upload your notes. Ask questions, get summaries, and quiz yourself &mdash; all answered straight from your own material.</p>
+    </div>
+
+    <div class="upload-zone" id="uploadZone">
+      <span class="icon">&#128214;</span>
+      <p>Drop PDF or .txt notes here<br>or click to browse</p>
+      <input type="file" id="fileInput" multiple accept=".pdf,.txt" style="display:none" />
+    </div>
+
+    <div class="doc-list-label">Your notes</div>
+    <div class="doc-list" id="docList">
+      <p class="empty-note">Nothing uploaded yet.</p>
+    </div>
+
+    <button class="clear-btn" id="clearBtn">Clear all notes</button>
+  </aside>
+
+  <main class="main">
+    <nav class="tabs">
+      <button class="tab active" data-tab="ask">Ask</button>
+      <button class="tab" data-tab="summary">Summary</button>
+      <button class="tab" data-tab="quiz">Quiz</button>
+    </nav>
+
+    <section class="panel active" id="panel-ask">
+      <div class="chat-log" id="chatLog">
+        <p class="placeholder">Ask anything about your uploaded notes &mdash; e.g. "Explain the second law of thermodynamics."</p>
+      </div>
+      <div class="ask-input-row">
+        <input type="text" id="questionInput" placeholder="Type your question..." />
+        <button class="primary" id="askBtn">Ask</button>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-summary">
+      <button class="primary" id="summarizeBtn" style="align-self:flex-start;">Generate summary</button>
+      <div id="summaryOutput"><p class="placeholder">Your summary will appear here.</p></div>
+    </section>
+
+    <section class="panel" id="panel-quiz">
+      <div class="quiz-controls">
+        <label for="quizCount">Number of questions</label>
+        <select id="quizCount">
+          <option value="3">3</option>
+          <option value="5" selected>5</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+        </select>
+        <button class="primary" id="quizBtn">Generate quiz</button>
+      </div>
+      <div id="quizOutput"><p class="placeholder">Your quiz will appear here.</p></div>
+    </section>
+  </main>
+</div>
+
+<script>
+const API = ""; // same-origin, backend serves this file
+
+const fileInput = document.getElementById('fileInput');
+const uploadZone = document.getElementById('uploadZone');
+const docList = document.getElementById('docList');
+const clearBtn = document.getElementById('clearBtn');
+
+let docs = [];
+
+uploadZone.addEventListener('click', () => fileInput.click());
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.classList.remove('dragover');
+  handleFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+async function handleFiles(fileList) {
+  if (!fileList.length) return;
+  const formData = new FormData();
+  for (const f of fileList) formData.append('files', f);
+
+  uploadZone.querySelector('p').textContent = 'Processing...';
+  const res = await fetch(`${API}/api/upload`, { method: 'POST', body: formData });
+  const data = await res.json();
+  uploadZone.querySelector('p').innerHTML = 'Drop PDF or .txt notes here<br>or click to browse';
+
+  data.processed.forEach(p => docs.push(p));
+  renderDocList();
+}
+
+function renderDocList() {
+  if (!docs.length) {
+    docList.innerHTML = '<p class="empty-note">Nothing uploaded yet.</p>';
+    return;
+  }
+  docList.innerHTML = docs.map(d => `
+    <div class="doc-item">
+      <span class="name">${d.filename}</span>
+      <span class="chunks">${d.chunks} chunks</span>
+    </div>
+  `).join('');
+}
+
+clearBtn.addEventListener('click', async () => {
+  await fetch(`${API}/api/reset`, { method: 'POST' });
+  docs = [];
+  renderDocList();
+});
+
+// Tabs
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(`panel-${tab.dataset.tab}`).classList.add('active');
+  });
+});
+
+// Ask
+const chatLog = document.getElementById('chatLog');
+const questionInput = document.getElementById('questionInput');
+const askBtn = document.getElementById('askBtn');
+
+async function ask() {
+  const question = questionInput.value.trim();
+  if (!question) return;
+  if (chatLog.querySelector('.placeholder')) chatLog.innerHTML = '';
+
+  const block = document.createElement('div');
+  block.className = 'qa-block';
+  block.innerHTML = `<div class="q-bubble">${escapeHtml(question)}</div><div class="a-bubble">Thinking...</div>`;
+  chatLog.appendChild(block);
+  questionInput.value = '';
+  askBtn.disabled = true;
+
+  try {
+    const res = await fetch(`${API}/api/ask`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question })
+    });
+    const data = await res.json();
+    const aBubble = block.querySelector('.a-bubble');
+    if (!res.ok) {
+      aBubble.textContent = data.detail || 'Something went wrong.';
+    } else {
+      aBubble.textContent = data.answer;
+      if (data.sources && data.sources.length) {
+        const src = document.createElement('div');
+        src.className = 'a-sources';
+        src.textContent = `Source: ${data.sources.join(', ')}`;
+        block.appendChild(src);
+      }
+    }
+  } catch (e) {
+    block.querySelector('.a-bubble').textContent = 'Could not reach the server.';
+  }
+  askBtn.disabled = false;
+}
+
+askBtn.addEventListener('click', ask);
+questionInput.addEventListener('keydown', e => { if (e.key === 'Enter') ask(); });
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// Summary
+const summarizeBtn = document.getElementById('summarizeBtn');
+const summaryOutput = document.getElementById('summaryOutput');
+
+summarizeBtn.addEventListener('click', async () => {
+  summaryOutput.innerHTML = '<p class="status-msg">Generating summary...</p>';
+  summarizeBtn.disabled = true;
+  try {
+    const res = await fetch(`${API}/api/summarize`);
+    const data = await res.json();
+    if (!res.ok) {
+      summaryOutput.innerHTML = `<p class="placeholder">${data.detail}</p>`;
+    } else {
+      summaryOutput.innerHTML = `<div class="summary-box">${escapeHtml(data.summary)}</div>`;
+    }
+  } catch (e) {
+    summaryOutput.innerHTML = '<p class="placeholder">Could not reach the server.</p>';
+  }
+  summarizeBtn.disabled = false;
+});
+
+// Quiz
+const quizBtn = document.getElementById('quizBtn');
+const quizOutput = document.getElementById('quizOutput');
+const quizCount = document.getElementById('quizCount');
+
+quizBtn.addEventListener('click', async () => {
+  quizOutput.innerHTML = '<p class="status-msg">Generating quiz...</p>';
+  quizBtn.disabled = true;
+  try {
+    const res = await fetch(`${API}/api/quiz`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ num_questions: parseInt(quizCount.value, 10) })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      quizOutput.innerHTML = `<p class="placeholder">${data.detail}</p>`;
+      return;
+    }
+    if (!data.questions.length) {
+      quizOutput.innerHTML = '<p class="placeholder">Could not generate a quiz. Try uploading notes first.</p>';
+      return;
+    }
+    quizOutput.innerHTML = '';
+    data.questions.forEach((q, i) => {
+      const card = document.createElement('div');
+      card.className = 'quiz-card';
+      card.style.marginBottom = '16px';
+      const optionsHtml = Object.entries(q.options).map(([key, val]) => `
+        <div class="option" data-key="${key}">
+          <span>${key.toUpperCase()}. ${escapeHtml(val)}</span>
+        </div>
+      `).join('');
+      card.innerHTML = `
+        <h3>${i + 1}. ${escapeHtml(q.question)}</h3>
+        ${optionsHtml}
+        <div class="explanation">${escapeHtml(q.explanation || '')}</div>
+      `;
+      card.querySelectorAll('.option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          if (card.dataset.answered) return;
+          card.dataset.answered = 'true';
+          card.querySelectorAll('.option').forEach(o => {
+            if (o.dataset.key === q.correct) o.classList.add('correct');
+            else if (o === opt) o.classList.add('wrong');
+          });
+          card.querySelector('.explanation').style.display = 'block';
+        });
+      });
+      quizOutput.appendChild(card);
+    });
+  } catch (e) {
+    quizOutput.innerHTML = '<p class="placeholder">Could not reach the server.</p>';
+  }
+  quizBtn.disabled = false;
+});
+</script>
+</body>
+</html>
