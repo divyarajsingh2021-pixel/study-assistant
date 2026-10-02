@@ -1,0 +1,2 @@
+<!-- PLACEHOLDER: Replace this file with demo.gif -->
+<!-- Capture instructions: 15-30 second animated screen recording showing PDF upload -> RAG chat question/answer -> mock test quiz interaction. -->
