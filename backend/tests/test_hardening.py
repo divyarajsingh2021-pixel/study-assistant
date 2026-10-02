@@ -1,5 +1,4 @@
-import pytest
-from app.config import settings, AppSettings
+from app.config import AppSettings, settings
 
 
 def test_cors_config_parsing():
