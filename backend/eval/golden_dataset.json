@@ -1,202 +1,1291 @@
 [
   {
     "id": 1,
-    "question": "What is the definition of a process in operating systems?",
-    "ground_truth_answer": "A process is defined as a program in execution, encompassing the text section, current activity tracked by the Program Counter and processor registers, stack, data section, and heap.",
-    "source_page": 1,
-    "expected_keywords": ["program in execution", "text section", "program counter", "stack", "heap"],
-    "topic": "Process Concept"
+    "split": "dev",
+    "category": "direct_lookup",
+    "question": "What is the minimum header size overhead of Transmission Control Protocol (TCP)?",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "The minimum header size overhead for TCP is 20 bytes, which can extend up to 60 bytes with optional header fields.",
+    "expected_keywords": [
+      "20 bytes",
+      "minimum",
+      "header"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Direct factual lookup from the TCP vs UDP specification table."
   },
   {
     "id": 2,
-    "question": "What is a Process Control Block (PCB) and what key information does it store?",
-    "ground_truth_answer": "The PCB is the central OS data structure used to maintain all information associated with an active process, including Process State, Program Counter, CPU registers, CPU-scheduling information, memory-management info, and accounting/I/O status.",
-    "source_page": 1,
-    "expected_keywords": ["process control block", "process state", "program counter", "cpu registers"],
-    "topic": "Process Concept"
+    "split": "dev",
+    "category": "direct_lookup",
+    "question": "Under the expenditure approach, what are the four component terms of GDP?",
+    "answerable": true,
+    "target_document": "Principles_of_Macroeconomics.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "Under the expenditure approach, GDP equals Y = C + I + G + (X - M), comprising consumption, investment, government spending, and net exports.",
+    "expected_keywords": [
+      "consumption",
+      "investment",
+      "government",
+      "net exports"
+    ],
+    "distractor_documents": [],
+    "rationale": "Direct factual lookup from Macroeconomics measuring output section."
   },
   {
     "id": 3,
-    "question": "What are the five primary process states recorded in the PCB?",
-    "ground_truth_answer": "The process states recorded in the PCB include New, Ready, Running, Waiting, and Terminated.",
-    "source_page": 1,
-    "expected_keywords": ["new", "ready", "running", "waiting", "terminated"],
-    "topic": "Process States"
+    "split": "dev",
+    "category": "direct_lookup",
+    "question": "What is the role of citrate synthase in the Krebs cycle?",
+    "answerable": true,
+    "target_document": "Cell_Biology_and_Metabolism.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "Citrate synthase catalyzes the condensation of 2-carbon Acetyl-CoA with 4-carbon oxaloacetate to form 6-carbon citrate.",
+    "expected_keywords": [
+      "citrate synthase",
+      "acetyl-coa",
+      "oxaloacetate",
+      "citrate"
+    ],
+    "distractor_documents": [],
+    "rationale": "Direct biochemical enzymatic factual lookup."
   },
   {
     "id": 4,
-    "question": "What memory components does a process stack hold?",
-    "ground_truth_answer": "A process stack contains temporary data such as function parameters, return addresses, and local variables.",
-    "source_page": 1,
-    "expected_keywords": ["function parameters", "return addresses", "local variables", "temporary data"],
-    "topic": "Process Memory"
+    "split": "dev",
+    "category": "direct_lookup",
+    "question": "What administrative distance is assigned to OSPFv2 by default?",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "OSPFv2 is assigned a default administrative distance of 110.",
+    "expected_keywords": [
+      "110",
+      "administrative distance",
+      "ospf"
+    ],
+    "distractor_documents": [],
+    "rationale": "Direct numeric lookup from the dynamic routing protocols table."
   },
   {
     "id": 5,
-    "question": "What is the purpose of the heap in a process memory layout?",
-    "ground_truth_answer": "The heap is used for runtime dynamic memory allocation.",
-    "source_page": 1,
-    "expected_keywords": ["heap", "runtime", "dynamic memory", "allocation"],
-    "topic": "Process Memory"
+    "split": "dev",
+    "category": "direct_lookup",
+    "question": "In the Raft consensus algorithm, what are the three possible states for a node?",
+    "answerable": true,
+    "target_document": "Distributed_Systems_Consensus.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "In Raft, nodes exist in one of three states: Follower, Candidate, or Leader.",
+    "expected_keywords": [
+      "follower",
+      "candidate",
+      "leader"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Direct lookup for state machine taxonomy in Raft."
   },
   {
     "id": 6,
-    "question": "How is a thread defined compared to a process?",
-    "ground_truth_answer": "A thread is the smallest schedulable unit of CPU utilization, commonly termed a lightweight process.",
-    "source_page": 1,
-    "expected_keywords": ["smallest schedulable unit", "cpu utilization", "lightweight process"],
-    "topic": "Threads"
+    "split": "dev",
+    "category": "direct_lookup",
+    "question": "What is the mathematical equation for the GDP Deflator?",
+    "answerable": true,
+    "target_document": "Principles_of_Macroeconomics.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "GDP Deflator = (Nominal GDP / Real GDP) * 100.",
+    "expected_keywords": [
+      "nominal gdp",
+      "real gdp",
+      "100"
+    ],
+    "distractor_documents": [],
+    "rationale": "Direct economic price index formula lookup."
   },
   {
     "id": 7,
-    "question": "What resources are shared among threads belonging to the same process?",
-    "ground_truth_answer": "Threads belonging to the same process share their code section, data section, and OS resources like open files and signals.",
-    "source_page": 1,
-    "expected_keywords": ["code section", "data section", "open files", "signals"],
-    "topic": "Threads"
+    "split": "dev",
+    "category": "direct_lookup",
+    "question": "What is the standard fixed header size of User Datagram Protocol (UDP)?",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "UDP has a fixed header size of 8 bytes containing source port, destination port, length, and checksum.",
+    "expected_keywords": [
+      "8 bytes",
+      "fixed",
+      "udp"
+    ],
+    "distractor_documents": [],
+    "rationale": "Direct lookup from networking table."
   },
   {
     "id": 8,
-    "question": "What unique state does each thread maintain individually?",
-    "ground_truth_answer": "Each thread maintains its own unique Thread ID, Program Counter, register set, and private execution stack.",
-    "source_page": 1,
-    "expected_keywords": ["thread id", "program counter", "register set", "execution stack"],
-    "topic": "Threads"
+    "split": "dev",
+    "category": "direct_lookup",
+    "question": "What is the function of phosphofructokinase-1 (PFK-1) in glycolysis?",
+    "answerable": true,
+    "target_document": "Cell_Biology_and_Metabolism.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "PFK-1 acts as the key rate-limiting committed step of glycolysis, consuming an ATP molecule during the energy investment phase.",
+    "expected_keywords": [
+      "rate-limiting",
+      "committed step",
+      "glycolysis",
+      "atp"
+    ],
+    "distractor_documents": [],
+    "rationale": "Direct enzymatic regulation lookup."
   },
   {
     "id": 9,
-    "question": "What are the key benefits of multithreading in applications?",
-    "ground_truth_answer": "Benefits include high responsiveness in interactive applications, efficient resource sharing without costly IPC, economy due to lower context switching overhead, and scalability across multicore hardware.",
-    "source_page": 1,
-    "expected_keywords": ["responsiveness", "resource sharing", "context switching", "scalability"],
-    "topic": "Threads"
+    "split": "test",
+    "category": "direct_lookup",
+    "question": "What is the fixed base header size of an IPv6 packet?",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 4,
+    "ground_truth_answer": "The IPv6 base header size is fixed at 40 bytes.",
+    "expected_keywords": [
+      "40 bytes",
+      "fixed",
+      "ipv6"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test lookup from IPv4 vs IPv6 header table."
   },
   {
     "id": 10,
-    "question": "What is a race condition in concurrent programming?",
-    "ground_truth_answer": "A race condition occurs when multiple concurrent threads or processes access and manipulate shared data, and the final outcome depends on the arbitrary execution order.",
-    "source_page": 2,
-    "expected_keywords": ["race condition", "shared data", "execution order"],
-    "topic": "Synchronization"
+    "split": "test",
+    "category": "direct_lookup",
+    "question": "In the Michaelis-Menten kinetic model, what does Km represent?",
+    "answerable": true,
+    "target_document": "Cell_Biology_and_Metabolism.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "Km (the Michaelis constant) represents the substrate concentration at which the reaction velocity is half of its maximum rate (Vmax).",
+    "expected_keywords": [
+      "michaelis constant",
+      "substrate concentration",
+      "half",
+      "vmax"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test biochemical kinetics lookup."
   },
   {
     "id": 11,
-    "question": "What are the three mandatory requirements for solving the Critical-Section Problem?",
-    "ground_truth_answer": "Any valid solution must satisfy: 1. Mutual Exclusion, 2. Progress, and 3. Bounded Waiting.",
-    "source_page": 2,
-    "expected_keywords": ["mutual exclusion", "progress", "bounded waiting"],
-    "topic": "Critical Section"
+    "split": "test",
+    "category": "direct_lookup",
+    "question": "What is the formula for the simple Keynesian Government Spending Multiplier?",
+    "answerable": true,
+    "target_document": "Principles_of_Macroeconomics.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "The multiplier formula is 1 / (1 - MPC), where MPC represents the Marginal Propensity to Consume.",
+    "expected_keywords": [
+      "1 / (1 - mpc)",
+      "marginal propensity to consume",
+      "multiplier"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test macroeconomic fiscal formula lookup."
   },
   {
     "id": 12,
-    "question": "How is the Mutual Exclusion requirement defined for critical sections?",
-    "ground_truth_answer": "Mutual Exclusion states that if process Pi is executing in its critical section, no other process can be executing in its critical section.",
-    "source_page": 2,
-    "expected_keywords": ["mutual exclusion", "critical section", "no other process"],
-    "topic": "Critical Section"
+    "split": "test",
+    "category": "direct_lookup",
+    "question": "What standard port number does BGP routers use for establishing peering sessions?",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "BGP establishes TCP peering sessions over port 179.",
+    "expected_keywords": [
+      "179",
+      "tcp",
+      "bgp"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test networking port lookup."
   },
   {
     "id": 13,
-    "question": "What does the Progress requirement ensure in critical section synchronization?",
-    "ground_truth_answer": "Progress ensures that if no process is in its critical section, only processes not in remainder sections can decide who enters next, and selection cannot be postponed indefinitely.",
-    "source_page": 2,
-    "expected_keywords": ["progress", "remainder section", "postponed indefinitely"],
-    "topic": "Critical Section"
+    "split": "test",
+    "category": "direct_lookup",
+    "question": "How many total nodes are required in a synchronous system to tolerate m Byzantine faulty nodes?",
+    "answerable": true,
+    "target_document": "Distributed_Systems_Consensus.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "Tolerating m Byzantine faulty nodes requires at least 3m + 1 total nodes.",
+    "expected_keywords": [
+      "3m + 1",
+      "byzantine",
+      "nodes"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test distributed fault tolerance bound lookup."
   },
   {
     "id": 14,
-    "question": "What is the definition of Bounded Waiting?",
-    "ground_truth_answer": "Bounded Waiting means there must exist a bound on the number of times other processes are allowed to enter their critical sections after a process has requested entry before that request is granted.",
-    "source_page": 2,
-    "expected_keywords": ["bounded waiting", "bound", "requested entry"],
-    "topic": "Critical Section"
+    "split": "test",
+    "category": "direct_lookup",
+    "question": "What are the three passes performed by the ARIES database recovery algorithm?",
+    "answerable": true,
+    "target_document": "Database_Systems_ACID.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "The ARIES recovery algorithm executes the Analysis Pass, the Redo Pass, and the Undo Pass.",
+    "expected_keywords": [
+      "analysis pass",
+      "redo pass",
+      "undo pass"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test database crash recovery phases."
   },
   {
     "id": 15,
-    "question": "How does a Mutex Lock operate?",
-    "ground_truth_answer": "A Mutex Lock is a boolean synchronization lock where a process must acquire the lock before entering its critical section and release it upon departure.",
-    "source_page": 2,
-    "expected_keywords": ["mutex lock", "boolean", "acquire", "release"],
-    "topic": "Mutexes"
+    "split": "test",
+    "category": "direct_lookup",
+    "question": "What default administrative distance is assigned to RIPv2?",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "RIPv2 is assigned a default administrative distance of 120.",
+    "expected_keywords": [
+      "120",
+      "ripv2",
+      "administrative distance"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test routing metric lookup."
   },
   {
     "id": 16,
-    "question": "Who introduced the Semaphore concept and what are its atomic operations?",
-    "ground_truth_answer": "A Semaphore is an integer synchronization variable introduced by Edsger Dijkstra, manipulated strictly through two atomic operations: wait() and signal().",
-    "source_page": 2,
-    "expected_keywords": ["semaphore", "dijkstra", "wait", "signal"],
-    "topic": "Semaphores"
+    "split": "dev",
+    "category": "paraphrased",
+    "question": "How do distributed clocks determine which event triggered another when physical quartz oscillators drift apart?",
+    "answerable": true,
+    "target_document": "Distributed_Systems_Consensus.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "Logical clocks use the 'happened-before' relation (->) while vector clocks maintain timestamp arrays tracking causal dependencies across nodes.",
+    "expected_keywords": [
+      "happened-before",
+      "vector clocks",
+      "causality",
+      "timestamps"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Paraphrased: uses 'quartz oscillators drift' instead of physical clock drift and asks about causal tracking."
   },
   {
     "id": 17,
-    "question": "What is the difference between Counting Semaphores and Binary Semaphores?",
-    "ground_truth_answer": "Counting Semaphores range over an unrestricted domain to control access to resource pools, while Binary Semaphores are constrained to 0 and 1, functioning identically to mutexes.",
-    "source_page": 2,
-    "expected_keywords": ["counting semaphores", "binary semaphores", "0 and 1", "mutexes"],
-    "topic": "Semaphores"
+    "split": "dev",
+    "category": "paraphrased",
+    "question": "What occurs when a transaction inspects provisional rows written by another worker that ends up aborting?",
+    "answerable": true,
+    "target_document": "Database_Systems_ACID.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "This anomaly is known as a Dirty Read, occurring when uncommitted updates are read before being rolled back.",
+    "expected_keywords": [
+      "dirty read",
+      "uncommitted",
+      "rolled back"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Paraphrased: avoids the phrase 'dirty read' in the query, describing the phenomenon conceptually."
   },
   {
     "id": 18,
-    "question": "What is the formal definition of a deadlock in operating systems?",
-    "ground_truth_answer": "A deadlock is a condition in which a set of concurrent processes are permanently blocked because each process holds a resource and waits for another resource held by another process in the set.",
-    "source_page": 3,
-    "expected_keywords": ["deadlock", "permanently blocked", "holds a resource", "waits"],
-    "topic": "Deadlocks"
+    "split": "dev",
+    "category": "paraphrased",
+    "question": "Why does unemployment have a negative correlation with rising wage pressures over short durations?",
+    "answerable": true,
+    "target_document": "Principles_of_Macroeconomics.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "The short-run Phillips curve shows that increased aggregate demand lowers joblessness while bidding up salaries and driving inflation higher.",
+    "expected_keywords": [
+      "phillips curve",
+      "aggregate demand",
+      "inflation"
+    ],
+    "distractor_documents": [],
+    "rationale": "Paraphrased: describes Phillips curve without mentioning 'Phillips curve'."
   },
   {
     "id": 19,
-    "question": "What are the four Coffman conditions necessary for a deadlock to arise?",
-    "ground_truth_answer": "The four conditions established by Coffman et al. are Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait.",
-    "source_page": 3,
-    "expected_keywords": ["coffman", "mutual exclusion", "hold and wait", "no preemption", "circular wait"],
-    "topic": "Deadlocks"
+    "split": "dev",
+    "category": "paraphrased",
+    "question": "How does the rotating protein motor at the inner mitochondrial partition produce chemical currency?",
+    "answerable": true,
+    "target_document": "Cell_Biology_and_Metabolism.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "ATP synthase channels protons flowing down their electrochemical gradient through the F0 rotor, driving conformational phosphorylation of ADP into ATP in the F1 unit.",
+    "expected_keywords": [
+      "atp synthase",
+      "protons",
+      "f0",
+      "f1",
+      "adp"
+    ],
+    "distractor_documents": [],
+    "rationale": "Paraphrased: describes ATP synthase as 'rotating protein motor producing chemical currency'."
   },
   {
     "id": 20,
-    "question": "What is the Hold and Wait condition for deadlocks?",
-    "ground_truth_answer": "Hold and Wait requires that a process must currently hold at least one resource and request additional resources held by other processes.",
-    "source_page": 3,
-    "expected_keywords": ["hold and wait", "hold at least one resource", "request additional resources"],
-    "topic": "Deadlocks"
+    "split": "dev",
+    "category": "paraphrased",
+    "question": "What mechanism allows local network machines to discover hardware interface addresses using internet layer identifiers?",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 4,
+    "ground_truth_answer": "Address Resolution Protocol (ARP) translates 32-bit IP addresses into 48-bit Ethernet MAC addresses by broadcasting requests across the subnet.",
+    "expected_keywords": [
+      "arp",
+      "mac address",
+      "broadcast"
+    ],
+    "distractor_documents": [],
+    "rationale": "Paraphrased: describes ARP without using the acronym 'ARP'."
   },
   {
     "id": 21,
-    "question": "What does No Preemption mean in the context of deadlock conditions?",
-    "ground_truth_answer": "No Preemption means resources cannot be forcibly seized; they can only be voluntarily released by the holding process.",
-    "source_page": 3,
-    "expected_keywords": ["no preemption", "forcibly seized", "voluntarily released"],
-    "topic": "Deadlocks"
+    "split": "dev",
+    "category": "paraphrased",
+    "question": "What measures prevent participants in a distributed transaction from proceeding if their central conductor vanishes?",
+    "answerable": true,
+    "target_document": "Distributed_Systems_Consensus.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "Two-Phase Commit (2PC) suffers from being a blocking protocol: if the coordinator crashes during the commit phase, cohort nodes remain stuck holding locks.",
+    "expected_keywords": [
+      "two-phase commit",
+      "2pc",
+      "coordinator",
+      "blocking"
+    ],
+    "distractor_documents": [
+      "Database_Systems_ACID.pdf"
+    ],
+    "rationale": "Paraphrased: describes the 2PC coordinator failure blocking problem."
   },
   {
     "id": 22,
-    "question": "How is the Circular Wait condition characterized?",
-    "ground_truth_answer": "Circular Wait exists when a closed chain of processes exists where each process holds resources required by the subsequent process in the loop.",
-    "source_page": 3,
-    "expected_keywords": ["circular wait", "closed chain", "subsequent process"],
-    "topic": "Deadlocks"
+    "split": "dev",
+    "category": "paraphrased",
+    "question": "How do monetary authorities pump liquidity into borrowing channels when benchmark cash borrowing rates are pinned at rock bottom?",
+    "answerable": true,
+    "target_document": "Principles_of_Macroeconomics.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "Through Quantitative Easing (QE), central banks manufacture new reserves to execute large-scale bond and asset purchases, driving down long-term interest rates.",
+    "expected_keywords": [
+      "quantitative easing",
+      "qe",
+      "asset purchases",
+      "long-term"
+    ],
+    "distractor_documents": [],
+    "rationale": "Paraphrased: conceptual query for Quantitative Easing at the Zero Lower Bound."
   },
   {
     "id": 23,
-    "question": "How does Deadlock Prevention work as a handling strategy?",
-    "ground_truth_answer": "Deadlock Prevention handles deadlocks by invalidating at least one of the four necessary conditions.",
-    "source_page": 3,
-    "expected_keywords": ["deadlock prevention", "invalidating", "four necessary conditions"],
-    "topic": "Deadlock Strategies"
+    "split": "dev",
+    "category": "paraphrased",
+    "question": "What biological strategy lets muscles generate energy when suffocated of oxygen during strenuous athletic exertion?",
+    "answerable": true,
+    "target_document": "Cell_Biology_and_Metabolism.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "Lactic acid fermentation sustains glycolysis by using lactate dehydrogenase to reduce pyruvate into lactate, regenerating NAD+ without oxygen.",
+    "expected_keywords": [
+      "lactic acid",
+      "fermentation",
+      "lactate dehydrogenase",
+      "nad+"
+    ],
+    "distractor_documents": [],
+    "rationale": "Paraphrased: describes anaerobic lactic fermentation in muscles."
   },
   {
     "id": 24,
-    "question": "What algorithm is used for Deadlock Avoidance to ensure safe states?",
-    "ground_truth_answer": "Deadlock Avoidance uses Dijkstra's Banker's Algorithm to ensure the system always remains in a safe state.",
-    "source_page": 3,
-    "expected_keywords": ["deadlock avoidance", "banker's algorithm", "safe state", "dijkstra"],
-    "topic": "Deadlock Strategies"
+    "split": "test",
+    "category": "paraphrased",
+    "question": "What strategy aborts a newly initiated transaction when it attempts to seize a lock currently controlled by a long-running senior worker?",
+    "answerable": true,
+    "target_document": "Database_Systems_ACID.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "In the Wait-Die deadlock prevention scheme, if a younger transaction requests a resource from an older transaction, the younger is terminated and restarted.",
+    "expected_keywords": [
+      "wait-die",
+      "younger",
+      "older",
+      "aborts"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Held-out test paraphrased: describes the Wait-Die deadlock prevention policy."
   },
   {
     "id": 25,
-    "question": "What are the three primary strategies for handling deadlocks?",
-    "ground_truth_answer": "The three strategies are Deadlock Prevention, Deadlock Avoidance, and Deadlock Detection with recovery.",
-    "source_page": 3,
-    "expected_keywords": ["prevention", "avoidance", "detection", "recovery"],
-    "topic": "Deadlock Strategies"
+    "split": "test",
+    "category": "paraphrased",
+    "question": "How does an autonomous system negotiate outbound paths with foreign networks using administrative policies rather than hop counters?",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "Border Gateway Protocol (BGP-4) uses path vector attributes and inter-domain peering agreements over TCP port 179 to determine reachability.",
+    "expected_keywords": [
+      "bgp",
+      "path vector",
+      "autonomous system",
+      "peering"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test paraphrased: describes BGP mechanics."
+  },
+  {
+    "id": 26,
+    "split": "test",
+    "category": "paraphrased",
+    "question": "Why does substantial deficit spending sometimes fail to stimulate private factory construction and business capital projects?",
+    "answerable": true,
+    "target_document": "Principles_of_Macroeconomics.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "The Crowding-Out Effect occurs when heavy government borrowing elevates market interest rates, dampening private capital investment.",
+    "expected_keywords": [
+      "crowding-out",
+      "interest rates",
+      "investment"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test paraphrased: describes crowding out."
+  },
+  {
+    "id": 27,
+    "split": "test",
+    "category": "paraphrased",
+    "question": "What cellular compartment synthesizes lipid steroid molecules while neutralizing chemical hazards?",
+    "answerable": true,
+    "target_document": "Cell_Biology_and_Metabolism.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "The Smooth Endoplasmic Reticulum (SER) manufactures lipids, phospholipids, and steroid hormones while detoxifying metabolic compounds.",
+    "expected_keywords": [
+      "smooth endoplasmic reticulum",
+      "smooth er",
+      "lipids",
+      "steroid"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test paraphrased: describes Smooth ER organelle."
+  },
+  {
+    "id": 28,
+    "split": "test",
+    "category": "paraphrased",
+    "question": "How does a distributed cluster detect a leader heart failure and pick a replacement before client operations stall?",
+    "answerable": true,
+    "target_document": "Distributed_Systems_Consensus.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "In Raft, if a follower's randomized election timer expires without heartbeats, it transitions to candidate, increments the term, and requests peer votes.",
+    "expected_keywords": [
+      "raft",
+      "election timer",
+      "candidate",
+      "heartbeat"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Held-out test paraphrased: describes Raft leader election trigger."
+  },
+  {
+    "id": 29,
+    "split": "test",
+    "category": "paraphrased",
+    "question": "Why are log entries systematically committed to disk platters prior to altering cached database pages?",
+    "answerable": true,
+    "target_document": "Database_Systems_ACID.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "Write-Ahead Logging (WAL) requires log updates to be flushed to non-volatile disk before modifying dirty pages in memory to ensure crash recovery.",
+    "expected_keywords": [
+      "write-ahead logging",
+      "wal",
+      "flushed",
+      "dirty pages"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Held-out test paraphrased: explains WAL protocol."
+  },
+  {
+    "id": 30,
+    "split": "test",
+    "category": "paraphrased",
+    "question": "What happens when intermediate packet forwarders encounter payload sizes larger than the outgoing interface can handle in IPv4 versus IPv6?",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 4,
+    "ground_truth_answer": "In IPv4, intermediate routers can fragment oversized packets, whereas in IPv6, fragmentation is restricted strictly to the sending host.",
+    "expected_keywords": [
+      "fragmentation",
+      "ipv4",
+      "ipv6",
+      "routers"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test paraphrased: compares IPv4 vs IPv6 fragmentation."
+  },
+  {
+    "id": 31,
+    "split": "dev",
+    "category": "multi_chunk",
+    "question": "How do the ATP investments made during the initial phase of glycolysis compare with the final yield of oxidative phosphorylation?",
+    "answerable": true,
+    "target_document": "Cell_Biology_and_Metabolism.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "Glycolysis consumes 2 ATP in its investment phase to yield a net of 2 ATP, whereas oxidative phosphorylation produces the vast majority of cellular energy, yielding 30-32 ATP per glucose.",
+    "expected_keywords": [
+      "glycolysis",
+      "oxidative phosphorylation",
+      "investment",
+      "30 to 32 atp"
+    ],
+    "distractor_documents": [],
+    "rationale": "Multi-page synthesis: synthesizes glycolysis on page 2 with oxidative phosphorylation on page 3."
+  },
+  {
+    "id": 32,
+    "split": "dev",
+    "category": "multi_chunk",
+    "question": "How does the short-run Phillips curve tradeoff relate to long-run central bank Quantitative Easing outcomes?",
+    "answerable": true,
+    "target_document": "Principles_of_Macroeconomics.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "While the short-run Phillips curve shows monetary expansion can temporarily reduce unemployment, the vertical long-run curve (NAIRU) means persistent stimulus like QE primarily elevates inflation.",
+    "expected_keywords": [
+      "phillips curve",
+      "nairu",
+      "quantitative easing",
+      "inflation"
+    ],
+    "distractor_documents": [],
+    "rationale": "Multi-page synthesis: combines Phillips curve trade-off with central bank monetary policy."
+  },
+  {
+    "id": 33,
+    "split": "dev",
+    "category": "multi_chunk",
+    "question": "Compare the header overhead and delivery guarantees of transport layer TCP with network layer IPv4 packets.",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "TCP requires a 20-60 byte header offering reliable guaranteed delivery, while IPv4 provides best-effort routing using a 20-byte base header verified by hop-by-hop checksums.",
+    "expected_keywords": [
+      "tcp",
+      "ipv4",
+      "header",
+      "guaranteed"
+    ],
+    "distractor_documents": [],
+    "rationale": "Multi-page synthesis across transport and network tables."
+  },
+  {
+    "id": 34,
+    "split": "dev",
+    "category": "multi_chunk",
+    "question": "Explain how strict serializability in databases is enforced using Two-Phase Locking and crash recovery via ARIES.",
+    "answerable": true,
+    "target_document": "Database_Systems_ACID.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "Conflict serializability is enforced by 2PL and Strict 2PL holding exclusive locks until completion, while ARIES uses WAL with analysis, redo, and undo passes to recover atomic state.",
+    "expected_keywords": [
+      "two-phase locking",
+      "strict 2pl",
+      "aries",
+      "wal"
+    ],
+    "distractor_documents": [
+      "Distributed_Systems_Consensus.pdf"
+    ],
+    "rationale": "Multi-page synthesis: locks on page 2 and ARIES recovery on page 3."
+  },
+  {
+    "id": 35,
+    "split": "dev",
+    "category": "multi_chunk",
+    "question": "How do logical vector clocks on page 1 of distributed systems relate to the consensus safety guarantees in Raft on page 2?",
+    "answerable": true,
+    "target_document": "Distributed_Systems_Consensus.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "Vector clocks track partial ordering and causal independence across nodes, whereas Raft establishes total log ordering through term numbers and leader replication quorums.",
+    "expected_keywords": [
+      "vector clocks",
+      "raft",
+      "ordering",
+      "consensus"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Multi-page synthesis: causality in distributed systems to consensus log ordering."
+  },
+  {
+    "id": 36,
+    "split": "dev",
+    "category": "multi_chunk",
+    "question": "How does the expenditure calculation of GDP connect to Keynesian multiplier effects from government spending?",
+    "answerable": true,
+    "target_document": "Principles_of_Macroeconomics.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "Under the expenditure approach, G directly increases aggregate output Y, which is then amplified across consumer rounds via the Keynesian multiplier 1 / (1 - MPC).",
+    "expected_keywords": [
+      "expenditure",
+      "multiplier",
+      "aggregate output",
+      "government"
+    ],
+    "distractor_documents": [],
+    "rationale": "Multi-page synthesis across macroeconomic accounting and fiscal policy."
+  },
+  {
+    "id": 37,
+    "split": "dev",
+    "category": "multi_chunk",
+    "question": "How do enzyme activation barriers on page 1 affect the rate-limiting committed step of cellular glycolysis on page 2?",
+    "answerable": true,
+    "target_document": "Cell_Biology_and_Metabolism.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "Enzymes catalyze reactions by lowering activation energy; in glycolysis, PFK-1 acts as the critical rate-limiting committed step regulating glycolytic flux.",
+    "expected_keywords": [
+      "activation energy",
+      "pfk-1",
+      "glycolysis",
+      "rate-limiting"
+    ],
+    "distractor_documents": [],
+    "rationale": "Multi-page synthesis: enzyme kinetics linked to metabolic regulation."
+  },
+  {
+    "id": 38,
+    "split": "dev",
+    "category": "multi_chunk",
+    "question": "Contrast how distance vector algorithms operate in RIPv2 compared to path vector routing in BGP.",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "RIPv2 uses Bellman-Ford distance vector with hop counts limited to 15, whereas BGP-4 uses path vector policy attributes to route between autonomous systems over TCP port 179.",
+    "expected_keywords": [
+      "ripv2",
+      "bellman-ford",
+      "bgp",
+      "path vector"
+    ],
+    "distractor_documents": [],
+    "rationale": "Multi-chunk comparison across routing protocols table and BGP text."
+  },
+  {
+    "id": 39,
+    "split": "test",
+    "category": "multi_chunk",
+    "question": "Explain how the two phases of Two-Phase Commit coordinate participants, and why coordinator failure results in blocking.",
+    "answerable": true,
+    "target_document": "Distributed_Systems_Consensus.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "Phase 1 prepares participants to vote VOTE_COMMIT or VOTE_ABORT, while Phase 2 broadcasts GLOBAL_COMMIT or GLOBAL_ABORT; if the coordinator crashes during Phase 2, cohort participants remain blocked indefinitely holding locks.",
+    "expected_keywords": [
+      "two-phase commit",
+      "prepare",
+      "commit",
+      "blocking"
+    ],
+    "distractor_documents": [
+      "Database_Systems_ACID.pdf"
+    ],
+    "rationale": "Held-out test multi-chunk: synthesizes 2PC mechanics and failure states."
+  },
+  {
+    "id": 40,
+    "split": "test",
+    "category": "multi_chunk",
+    "question": "Synthesize the three types of unemployment and explain how fiscal stimulus addresses cyclical unemployment.",
+    "answerable": true,
+    "target_document": "Principles_of_Macroeconomics.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "Unemployment comprises frictional, structural, and cyclical; fiscal policy expands government spending to increase aggregate demand and directly counter cyclical downturns.",
+    "expected_keywords": [
+      "frictional",
+      "structural",
+      "cyclical",
+      "aggregate demand"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test multi-page synthesis in macroeconomics."
+  },
+  {
+    "id": 41,
+    "split": "test",
+    "category": "multi_chunk",
+    "question": "How does electron transfer through mitochondrial Complexes I to IV generate the proton-motive force powering ATP synthase?",
+    "answerable": true,
+    "target_document": "Cell_Biology_and_Metabolism.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "Electrons from NADH and FADH2 flow exergonically through Complexes I-IV to reduce oxygen to water, pumping protons into the intermembrane space to drive ATP synthase via chemiosmosis.",
+    "expected_keywords": [
+      "complexes",
+      "proton gradient",
+      "atp synthase",
+      "chemiosmosis"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test multi-chunk synthesis of cellular respiration."
+  },
+  {
+    "id": 42,
+    "split": "test",
+    "category": "multi_chunk",
+    "question": "Compare the addressing mechanisms used across Layer 2 frames, Layer 3 packets, and Layer 4 segments in networking.",
+    "answerable": true,
+    "target_document": "Computer_Networking_Protocols.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "Layer 2 uses 48-bit MAC addresses, Layer 3 uses 32-bit (IPv4) or 128-bit (IPv6) IP addresses, and Layer 4 uses 16-bit Port numbers.",
+    "expected_keywords": [
+      "mac address",
+      "ip address",
+      "port numbers",
+      "layer"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test multi-row table synthesis."
+  },
+  {
+    "id": 43,
+    "split": "test",
+    "category": "multi_chunk",
+    "question": "How does the growing phase in 2PL differ from the shrinking phase, and how does Strict 2PL modify lock releases?",
+    "answerable": true,
+    "target_document": "Database_Systems_ACID.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "In 2PL, the growing phase allows acquiring locks without releases, and the shrinking phase allows releases without new acquisitions; Strict 2PL requires exclusive locks to be held until transaction commit/abort.",
+    "expected_keywords": [
+      "growing phase",
+      "shrinking phase",
+      "strict 2pl",
+      "exclusive locks"
+    ],
+    "distractor_documents": [
+      "Distributed_Systems_Consensus.pdf"
+    ],
+    "rationale": "Held-out test multi-chunk locking protocol synthesis."
+  },
+  {
+    "id": 44,
+    "split": "test",
+    "category": "multi_chunk",
+    "question": "Explain how the Central Bank uses Open Market Operations to target policy interest rates and influence the IS-LM equilibrium.",
+    "answerable": true,
+    "target_document": "Principles_of_Macroeconomics.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "The central bank buys and sells treasury securities via OMO to adjust bank reserves, shifting the LM curve and setting equilibrium interest rates.",
+    "expected_keywords": [
+      "open market operations",
+      "is-lm",
+      "interest rates",
+      "reserves"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test multi-page macroeconomic synthesis."
+  },
+  {
+    "id": 45,
+    "split": "test",
+    "category": "multi_chunk",
+    "question": "How do rough endoplasmic reticulum ribosomes coordinate with the Golgi apparatus for glycoprotein distribution?",
+    "answerable": true,
+    "target_document": "Cell_Biology_and_Metabolism.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "Ribosomes on the rough ER synthesize secretory and membrane proteins, which are transferred to the Golgi apparatus for modification, sorting, and packaging into secretory vesicles.",
+    "expected_keywords": [
+      "rough er",
+      "golgi apparatus",
+      "vesicles",
+      "glycoprotein"
+    ],
+    "distractor_documents": [],
+    "rationale": "Held-out test multi-chunk organelle trafficking synthesis."
+  },
+  {
+    "id": 46,
+    "split": "dev",
+    "category": "cross_document_distractor",
+    "question": "How does the Chandy-Misra-Haas edge-chasing algorithm detect distributed deadlocks using probe messages?",
+    "answerable": true,
+    "target_document": "Distributed_Systems_Consensus.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "The Chandy-Misra-Haas algorithm propagates probe messages along edges of the distributed Wait-For Graph; if a probe returns to its initiator, a global deadlock cycle exists.",
+    "expected_keywords": [
+      "chandy-misra-haas",
+      "probe messages",
+      "distributed deadlock",
+      "initiator"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf",
+      "Database_Systems_ACID.pdf"
+    ],
+    "rationale": "Distractor stress test: Deadlock query. Target is Distributed Systems, NOT OS Coffman deadlocks or DBMS Wait-Die."
+  },
+  {
+    "id": 47,
+    "split": "dev",
+    "category": "cross_document_distractor",
+    "question": "What is the difference between Wait-Die and Wound-Wait schemes for deadlock prevention in database systems?",
+    "answerable": true,
+    "target_document": "Database_Systems_ACID.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "In Wait-Die, an older transaction can wait for a younger one, but a younger requesting an older dies; in Wound-Wait, an older transaction preempts/wounds a younger one, while a younger waits.",
+    "expected_keywords": [
+      "wait-die",
+      "wound-wait",
+      "timestamps",
+      "preemption"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf",
+      "Distributed_Systems_Consensus.pdf"
+    ],
+    "rationale": "Distractor stress test: Deadlock prevention. Target is DBMS ACID, NOT OS Banker's Algorithm."
+  },
+  {
+    "id": 48,
+    "split": "test",
+    "category": "cross_document_distractor",
+    "question": "What are the four necessary Coffman conditions required for an operating system deadlock to occur?",
+    "answerable": true,
+    "target_document": "Operating_Systems_Concurrency.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "The four Coffman conditions are: 1. Mutual Exclusion, 2. Hold and Wait, 3. No Preemption, and 4. Circular Wait.",
+    "expected_keywords": [
+      "coffman",
+      "mutual exclusion",
+      "hold and wait",
+      "circular wait"
+    ],
+    "distractor_documents": [
+      "Database_Systems_ACID.pdf",
+      "Distributed_Systems_Consensus.pdf"
+    ],
+    "rationale": "Distractor stress test: Deadlock conditions. Target is OS Concurrency, NOT Database or Distributed deadlocks."
+  },
+  {
+    "id": 49,
+    "split": "dev",
+    "category": "cross_document_distractor",
+    "question": "How does Two-Phase Locking (2PL) differ from the Two-Phase Commit (2PC) protocol?",
+    "answerable": true,
+    "target_document": "Database_Systems_ACID.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "2PL is a concurrency control protocol governing lock acquisition and release within a database, whereas 2PC is a distributed consensus commit protocol across remote storage partitions.",
+    "expected_keywords": [
+      "two-phase locking",
+      "2pl",
+      "two-phase commit",
+      "2pc"
+    ],
+    "distractor_documents": [
+      "Distributed_Systems_Consensus.pdf"
+    ],
+    "rationale": "Distractor stress test: 2PL (DBMS) vs 2PC (Distributed Systems)."
+  },
+  {
+    "id": 50,
+    "split": "dev",
+    "category": "cross_document_distractor",
+    "question": "In operating system process management, what are the five states a process moves between?",
+    "answerable": true,
+    "target_document": "Operating_Systems_Concurrency.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "The five OS process states are New, Ready, Running, Waiting, and Terminated.",
+    "expected_keywords": [
+      "new",
+      "ready",
+      "running",
+      "waiting",
+      "terminated"
+    ],
+    "distractor_documents": [
+      "Distributed_Systems_Consensus.pdf"
+    ],
+    "rationale": "Distractor stress test: OS process states vs Raft node states (Follower/Candidate/Leader)."
+  },
+  {
+    "id": 51,
+    "split": "dev",
+    "category": "cross_document_distractor",
+    "question": "What is the difference between a phantom deadlock in distributed systems and a phantom read in relational databases?",
+    "answerable": true,
+    "target_document": "Database_Systems_ACID.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "A phantom read in databases occurs when a re-executed range query sees newly committed rows, whereas a phantom deadlock in distributed systems is a false cycle detected due to network propagation delay.",
+    "expected_keywords": [
+      "phantom read",
+      "phantom deadlock",
+      "range query",
+      "propagation delay"
+    ],
+    "distractor_documents": [
+      "Distributed_Systems_Consensus.pdf"
+    ],
+    "rationale": "Distractor stress test: 'Phantom' in DBMS vs 'Phantom' in Distributed Systems."
+  },
+  {
+    "id": 52,
+    "split": "dev",
+    "category": "cross_document_distractor",
+    "question": "How does counting semaphore synchronization in operating systems differ from shared and exclusive locks in databases?",
+    "answerable": true,
+    "target_document": "Operating_Systems_Concurrency.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "Counting semaphores manage finite integer permits for shared resource pools, whereas database S/X locks enforce read/write concurrency conflict serializability.",
+    "expected_keywords": [
+      "counting semaphore",
+      "shared lock",
+      "exclusive lock"
+    ],
+    "distractor_documents": [
+      "Database_Systems_ACID.pdf"
+    ],
+    "rationale": "Distractor stress test: OS synchronization primitives vs DBMS transaction locking."
+  },
+  {
+    "id": 53,
+    "split": "test",
+    "category": "cross_document_distractor",
+    "question": "What is the purpose of a Wait-For Graph in relational database transaction management?",
+    "answerable": true,
+    "target_document": "Database_Systems_ACID.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "In databases, a Wait-For Graph detects deadlocks by mapping transactions as vertices and waiting dependencies as edges; a cycle indicates a deadlock requiring a victim to abort.",
+    "expected_keywords": [
+      "wait-for graph",
+      "cycle",
+      "victim",
+      "transaction"
+    ],
+    "distractor_documents": [
+      "Distributed_Systems_Consensus.pdf",
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Held-out test distractor: WFG in DBMS vs distributed edge chasing."
+  },
+  {
+    "id": 54,
+    "split": "test",
+    "category": "cross_document_distractor",
+    "question": "How do Dijkstra semaphore wait and signal operations function in operating systems?",
+    "answerable": true,
+    "target_document": "Operating_Systems_Concurrency.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "Dijkstra's semaphore wait() decrements the integer counter and blocks if negative, while signal() increments the counter and unblocks waiting threads.",
+    "expected_keywords": [
+      "wait",
+      "signal",
+      "semaphore",
+      "dijkstra"
+    ],
+    "distractor_documents": [
+      "Database_Systems_ACID.pdf"
+    ],
+    "rationale": "Held-out test distractor: OS atomic primitives vs database locks."
+  },
+  {
+    "id": 55,
+    "split": "test",
+    "category": "cross_document_distractor",
+    "question": "What is the FLP Impossibility Theorem in distributed systems?",
+    "answerable": true,
+    "target_document": "Distributed_Systems_Consensus.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "Fischer, Lynch, and Paterson proved that deterministic asynchronous consensus is impossible if even a single node can suffer an unannounced crash.",
+    "expected_keywords": [
+      "flp impossibility",
+      "fischer",
+      "asynchronous consensus",
+      "crash"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Held-out test distractor: Distributed consensus limits vs OS synchronization."
+  },
+  {
+    "id": 56,
+    "split": "test",
+    "category": "cross_document_distractor",
+    "question": "How do BGP path vectors differ from vector clocks in distributed systems?",
+    "answerable": true,
+    "target_document": "Distributed_Systems_Consensus.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "Vector clocks track logical causality across distributed processes, whereas BGP path vectors list autonomous system AS-numbers to route network traffic.",
+    "expected_keywords": [
+      "vector clocks",
+      "path vector",
+      "causality",
+      "autonomous system"
+    ],
+    "distractor_documents": [
+      "Computer_Networking_Protocols.pdf"
+    ],
+    "rationale": "Held-out test distractor: 'Vector' in Distributed Systems vs 'Vector' in Networking."
+  },
+  {
+    "id": 57,
+    "split": "test",
+    "category": "cross_document_distractor",
+    "question": "How does Banker's Algorithm ensure safe state resource allocation in operating systems?",
+    "answerable": true,
+    "target_document": "Operating_Systems_Concurrency.pdf",
+    "target_page": 3,
+    "ground_truth_answer": "Banker's Algorithm tests for safe states by simulating resource allocation against maximum process claims, granting requests only if an execution sequence exists avoiding deadlock.",
+    "expected_keywords": [
+      "banker",
+      "safe state",
+      "deadlock avoidance"
+    ],
+    "distractor_documents": [
+      "Database_Systems_ACID.pdf"
+    ],
+    "rationale": "Held-out test distractor: OS deadlock avoidance vs DBMS Wait-Die."
+  },
+  {
+    "id": 58,
+    "split": "test",
+    "category": "cross_document_distractor",
+    "question": "What is the difference between an uncommitted transaction rollback in DBMS and process termination in an OS?",
+    "answerable": true,
+    "target_document": "Database_Systems_ACID.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "DBMS rollback reverses database changes using UNDO log records to maintain ACID atomicity, whereas OS process termination reclaims CPU, memory, and PCB allocations.",
+    "expected_keywords": [
+      "rollback",
+      "atomicity",
+      "undo",
+      "process termination"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Held-out test distractor: ACID atomicity rollback vs OS process lifecycle."
+  },
+  {
+    "id": 59,
+    "split": "test",
+    "category": "cross_document_distractor",
+    "question": "In distributed systems, how does Paxos prepare/promise phase achieve safety across partition healing?",
+    "answerable": true,
+    "target_document": "Distributed_Systems_Consensus.pdf",
+    "target_page": 2,
+    "ground_truth_answer": "Paxos Phase 1 requires proposers to gain promises from a majority quorum with proposal number n, ensuring overlapping majorities preserve agreed state across network partitions.",
+    "expected_keywords": [
+      "paxos",
+      "prepare",
+      "promise",
+      "quorum"
+    ],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Held-out test distractor: Paxos quorums vs OS mutex synchronization."
+  },
+  {
+    "id": 60,
+    "split": "test",
+    "category": "cross_document_distractor",
+    "question": "What role does the Program Counter play in a process control block versus individual threads in an OS?",
+    "answerable": true,
+    "target_document": "Operating_Systems_Concurrency.pdf",
+    "target_page": 1,
+    "ground_truth_answer": "While a PCB records the overall process program counter, each individual thread maintains its own private Program Counter, register set, and execution stack.",
+    "expected_keywords": [
+      "program counter",
+      "pcb",
+      "thread",
+      "stack"
+    ],
+    "distractor_documents": [
+      "Distributed_Systems_Consensus.pdf"
+    ],
+    "rationale": "Held-out test distractor: OS PCB vs thread state."
+  },
+  {
+    "id": 61,
+    "split": "dev",
+    "category": "unanswerable",
+    "question": "How does Shor's quantum algorithm exploit quantum superposition to factor prime numbers?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [],
+    "rationale": "Unanswerable out-of-domain query: Quantum computing algorithms."
+  },
+  {
+    "id": 62,
+    "split": "dev",
+    "category": "unanswerable",
+    "question": "What architectural techniques did Roman engineers use to construct the Colosseum aqueducts?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [],
+    "rationale": "Unanswerable out-of-domain query: Ancient Roman civil engineering."
+  },
+  {
+    "id": 63,
+    "split": "dev",
+    "category": "unanswerable",
+    "question": "What was the significance of the storming of the Bastille during the French Revolution in 1789?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [],
+    "rationale": "Unanswerable out-of-domain query: European history."
+  },
+  {
+    "id": 64,
+    "split": "dev",
+    "category": "unanswerable",
+    "question": "How does the Black-Scholes model compute European call option pricing using implied volatility?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [
+      "Principles_of_Macroeconomics.pdf"
+    ],
+    "rationale": "Unanswerable near-domain query: Quantitative finance derivative options pricing."
+  },
+  {
+    "id": 65,
+    "split": "dev",
+    "category": "unanswerable",
+    "question": "How do diffusion models iteratively denoise Gaussian noise in generative AI image synthesis?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [],
+    "rationale": "Unanswerable out-of-domain query: Generative AI image diffusion."
+  },
+  {
+    "id": 66,
+    "split": "dev",
+    "category": "unanswerable",
+    "question": "What chemical steps synthesize acetylsalicylic acid from salicylic acid and acetic anhydride?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [
+      "Cell_Biology_and_Metabolism.pdf"
+    ],
+    "rationale": "Unanswerable near-domain query: Organic pharmaceutical chemical synthesis."
+  },
+  {
+    "id": 67,
+    "split": "test",
+    "category": "unanswerable",
+    "question": "How does the IPv7 Turbo-IP protocol defined in RFC 9999 handle quantum packet routing?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [
+      "Computer_Networking_Protocols.pdf"
+    ],
+    "rationale": "Held-out test unanswerable query: Fictitious networking RFC 9999 specification."
+  },
+  {
+    "id": 68,
+    "split": "test",
+    "category": "unanswerable",
+    "question": "How does tectonic plate subduction in the Mariana Trench trigger deep-focus oceanic earthquakes?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [],
+    "rationale": "Held-out test unanswerable query: Plate tectonics geology."
+  },
+  {
+    "id": 69,
+    "split": "test",
+    "category": "unanswerable",
+    "question": "What light-dependent photon absorption reactions occur inside chloroplast thylakoids during photosynthesis?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [
+      "Cell_Biology_and_Metabolism.pdf"
+    ],
+    "rationale": "Held-out test near-domain unanswerable query: Plant photosynthesis thylakoid energetics."
+  },
+  {
+    "id": 70,
+    "split": "test",
+    "category": "unanswerable",
+    "question": "How do compiler register allocators use Chaitin graph coloring on interference graphs?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [
+      "Operating_Systems_Concurrency.pdf"
+    ],
+    "rationale": "Held-out test unanswerable query: Compiler optimization register allocation."
+  },
+  {
+    "id": 71,
+    "split": "test",
+    "category": "unanswerable",
+    "question": "How does the Chomsky hierarchy classify context-free grammars against pushdown automata?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [],
+    "rationale": "Held-out test unanswerable query: Formal language theory."
+  },
+  {
+    "id": 72,
+    "split": "test",
+    "category": "unanswerable",
+    "question": "What cosmological evidence supports cosmic microwave background radiation anisotropies in dark matter models?",
+    "answerable": false,
+    "target_document": null,
+    "target_page": null,
+    "ground_truth_answer": "The answer is not found in the provided documents.",
+    "expected_keywords": [],
+    "distractor_documents": [],
+    "rationale": "Held-out test unanswerable query: Astrophysics and cosmology."
   }
 ]
