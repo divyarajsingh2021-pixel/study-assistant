@@ -1,0 +1,2 @@
+<!-- PLACEHOLDER: Replace this file with 01_document_library.png -->
+<!-- Capture instructions: Main document library showing uploaded PDFs with metadata (pages, chunks, upload date) and action buttons. -->

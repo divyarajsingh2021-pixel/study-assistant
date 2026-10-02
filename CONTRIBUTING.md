@@ -1,12 +1,6 @@
 # Contributing to AI Study Assistant
 
-Thank you for your interest in contributing to **AI Study Assistant**! We welcome bug reports, feature requests, documentation improvements, and code contributions.
-
----
-
-## Code of Conduct
-
-Please be respectful, collaborative, and constructive when engaging in issues and discussions.
+Thank you for contributing to **AI Study Assistant**! We welcome bug reports, feature requests, documentation improvements, and code contributions.
 
 ---
 
@@ -16,29 +10,31 @@ Please be respectful, collaborative, and constructive when engaging in issues an
 - **Python:** 3.11+
 - **Node.js:** 20+
 - **Git**
-- **Docker & Docker Compose** (Optional for container testing)
+- **Docker & Docker Compose** (optional, for containerised testing)
+- **Ollama** (optional, for local embedding and LLM generation)
 
 ### 2. Fork & Clone
 ```bash
-git clone https://github.com/your-username/study-assistant.git
+git clone https://github.com/[Your-Username]/study-assistant.git
 cd study-assistant
 ```
 
 ### 3. Local Environment Setup
 
-#### Backend Setup:
+#### Backend:
 ```bash
 cd backend
 python -m venv venv
-# On Linux/macOS:
+
+# Windows (PowerShell):
+venv\Scripts\Activate.ps1
+# macOS / Linux:
 source venv/bin/activate
-# On Windows:
-venv\Scripts\activate
 
 pip install -r requirements.txt
 ```
 
-#### Frontend Setup:
+#### Frontend:
 ```bash
 cd frontend
 npm ci
@@ -49,15 +45,15 @@ npm ci
 ## Development Workflow
 
 ### Branch Naming Conventions
-- `feat/feature-name` for new capabilities
-- `fix/bug-description` for defect fixes
-- `test/test-suite` for testing additions
-- `docs/doc-update` for documentation changes
-- `chore/task-name` for tooling and build updates
+- `feat/feature-name` — new features or capabilities
+- `fix/bug-description` — defect fixes
+- `test/test-suite` — test additions or improvements
+- `docs/doc-update` — documentation updates
+- `chore/task-name` — tooling, dependencies, or configuration
 
 ### Commit Messages
 We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
-```
+```text
 feat(quiz): add timer and difficulty selection
 fix(pdf): handle password-protected documents gracefully
 test(rag): add golden retrieval test cases
@@ -68,17 +64,18 @@ docs(readme): update docker compose instructions
 
 ## Testing & Quality Checks
 
-Before submitting a Pull Request, make sure all tests pass and formatting is clean:
+Run the following checks before opening a Pull Request:
 
 ```bash
-# 1. Run Ruff linter and formatter
-ruff check .
-ruff format --check .
+# 1. Run Ruff linter and format check
+python -m ruff check .
+python -m ruff format --check .
 
-# 2. Run Pytest test suite with coverage
+# 2. Run Pytest suite with coverage
 pytest backend/tests --cov=backend/app --cov-report=term-missing
 
-# 3. Run Offline RAG Evaluation Benchmark
+# 3. Run Offline RAG Evaluation Benchmark (from backend/ directory)
+cd backend
 python -m eval.run
 
 # 4. Validate Frontend Build
@@ -92,6 +89,6 @@ npm run build
 
 1. Push your branch to your fork.
 2. Open a Pull Request targeting the `main` branch.
-3. Ensure the PR title clearly describes the change.
-4. Verify that all GitHub Actions CI checks pass.
-5. Address any code review feedback.
+3. Fill out the PR template completely.
+4. Ensure all CI checks pass.
+5. Address any code review comments.

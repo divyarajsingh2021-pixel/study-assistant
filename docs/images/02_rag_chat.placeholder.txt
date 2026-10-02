@@ -1,0 +1,2 @@
+<!-- PLACEHOLDER: Replace this file with 02_rag_chat.png -->
+<!-- Capture instructions: Grounded RAG Chat tab with a question, answered response, document/page citation card, and provider badge. -->

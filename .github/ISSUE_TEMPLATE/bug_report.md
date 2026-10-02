@@ -1,9 +1,9 @@
 ---
-name: Bug report
-about: Create a report to help us improve AI Study Assistant
-title: '[BUG] '
-labels: 'bug'
-assignees: ''
+name: Bug Report
+about: Create a report to help us fix an issue
+title: "[BUG] "
+labels: ["bug"]
+assignees: ""
 ---
 
 **Describe the bug**
@@ -19,15 +19,12 @@ Steps to reproduce the behavior:
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
 **Environment (please complete the following information):**
- - OS: [e.g. Windows 11, macOS Sonoma, Ubuntu 22.04]
- - Browser: [e.g. Chrome, Firefox, Safari]
- - LLM Provider: [e.g. Ollama llama3.1, Groq, Offline Heuristic]
+ - OS: [e.g. Windows 11, Ubuntu 22.04, macOS 14]
  - Python Version: [e.g. 3.11.4]
  - Node.js Version: [e.g. 20.10.0]
+ - Browser: [e.g. Chrome, Firefox, Safari]
+ - LLM Provider: [e.g. Ollama (model name), Groq, Local Heuristic]
 
 **Additional context**
-Add any other context about the problem here (e.g. backend logs or browser console errors).
+Add any other context about the problem here (logs, terminal output, error tracebacks).

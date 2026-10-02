@@ -1,0 +1,2 @@
+<!-- PLACEHOLDER: Replace this file with 03_mock_test.png -->
+<!-- Capture instructions: Mock Test tab showing completed test with score (e.g., 4/5), celebration banner, and question review with explanations. -->

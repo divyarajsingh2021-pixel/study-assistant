@@ -14,6 +14,10 @@ backend/venv/
 venv/
 ENV/
 env/
+.coverage
+coverage.xml
+.pytest_cache/
+.ruff_cache/
 
 # Environment files with private secrets
 .env
