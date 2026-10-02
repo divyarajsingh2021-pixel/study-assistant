@@ -332,4 +332,4 @@ See [CHANGELOG.md](./CHANGELOG.md) for a full history of changes.
 ## License
 
 MIT — see [LICENSE](./LICENSE).  
-Copyright © 2026 Divyaraj Singh.
+Copyright © 2026 DIVYARAJ SINGH CHUNDAWAT.
