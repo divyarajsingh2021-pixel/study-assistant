@@ -1,5 +1,9 @@
+import logging
+import re
+import time
 import uuid
 from datetime import datetime
+from pathlib import Path
 
 from app.config import UPLOADS_DIR, settings
 from app.models.schemas import (
@@ -30,24 +34,93 @@ from app.services.quiz_service import quiz_service
 from app.services.rag_service import rag_service
 from app.services.revision_service import revision_service
 from app.services.vector_service import vector_service
-from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile, status
+from fastapi import (
+    Depends,
+    FastAPI,
+    File,
+    Header,
+    HTTPException,
+    Request,
+    Response,
+    UploadFile,
+    status,
+)
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
+from slowapi.util import get_remote_address
 
-app = FastAPI(
-    title="DSC AI Study & Exam Suite API",
-    description="FastAPI backend for RAG study assistant, mock test generation, and user-isolated notes",
-    version="2.0.0",
+# Configure structured logging
+logging.basicConfig(
+    level=getattr(logging, settings.log_level.upper(), logging.INFO),
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+logger = logging.getLogger("study_assistant")
+
+# Configure rate limiter
+limiter = Limiter(
+    key_func=get_remote_address,
+    default_limits=[settings.rate_limit_default],
 )
 
-# Enable CORS for all frontends (Vite dev server + production Vercel)
+app = FastAPI(
+    title="AI Study Assistant API",
+    description="Production-ready FastAPI backend for RAG study assistant, mock test generation, and user-isolated notes",
+    version="1.1.0",
+)
+
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_middleware(SlowAPIMiddleware)
+
+# CORS Configuration
+is_wildcard = settings.allowed_origins == ["*"] or settings.allowed_origins == "*"
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=settings.allowed_origins,
+    allow_credentials=not is_wildcard,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# Structured Request Logging Middleware
+@app.middleware("http")
+async def logging_middleware(request: Request, call_next):
+    start_time = time.perf_counter()
+    response = await call_next(request)
+    process_time_ms = (time.perf_counter() - start_time) * 1000.0
+    logger.info(
+        f"{request.method} {request.url.path} -> {response.status_code} ({process_time_ms:.2f}ms)"
+    )
+    return response
+
+
+# Consistent Error Handlers
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail, "status_code": exc.status_code, "path": request.url.path},
+    )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={
+            "detail": "Request validation failed",
+            "errors": exc.errors(),
+            "status_code": 422,
+            "path": request.url.path,
+        },
+    )
+
 
 # ----------------- AUTH DEPENDENCY HELPERS -----------------
 
@@ -102,7 +175,7 @@ async def get_admin_user(current_user: dict = Depends(get_current_user)) -> dict
 @app.get("/")
 @app.head("/")
 async def root():
-    return {"status": "online", "name": "DSC AI Backend", "version": "2.0.0"}
+    return {"status": "online", "name": "AI Study Assistant Backend", "version": "1.1.0"}
 
 
 @app.get("/health", response_model=HealthResponse)
@@ -161,18 +234,42 @@ async def list_documents(current_user: dict = Depends(get_current_user)):
 
 
 @app.post("/api/upload", response_model=DocumentInfo)
-async def upload_pdf(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
-    if not file.filename.lower().endswith(".pdf"):
+@limiter.limit(settings.rate_limit_upload)
+async def upload_pdf(
+    request: Request, file: UploadFile = File(...), current_user: dict = Depends(get_current_user)
+):
+    # 1. Filename & Extension Sanitization
+    raw_filename = file.filename or "upload.pdf"
+    base_name = Path(raw_filename).name
+    if not base_name.lower().endswith(".pdf"):
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="Only PDF files (.pdf) are supported."
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Only PDF files (.pdf) are supported.",
+        )
+
+    safe_filename = re.sub(r"[^a-zA-Z0-9_.-]", "_", base_name)
+    if not safe_filename or safe_filename.startswith("."):
+        safe_filename = f"doc_{int(time.time())}.pdf"
+
+    # 2. File Size & Magic Bytes Validation
+    contents = await file.read()
+    if len(contents) > settings.max_upload_size_bytes:
+        max_mb = settings.max_upload_size_bytes // (1024 * 1024)
+        raise HTTPException(
+            status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+            detail=f"File exceeds maximum allowed size of {max_mb} MB.",
+        )
+
+    if not contents.startswith(b"%PDF-"):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Uploaded file is not a valid PDF document (invalid magic header).",
         )
 
     doc_id = str(uuid.uuid4())[:12]
-    safe_filename = file.filename.replace(" ", "_")
     target_path = UPLOADS_DIR / f"{doc_id}_{safe_filename}"
 
     try:
-        contents = await file.read()
         with open(target_path, "wb") as f:
             f.write(contents)
 
@@ -181,11 +278,11 @@ async def upload_pdf(file: UploadFile = File(...), current_user: dict = Depends(
         upload_date = datetime.now().strftime("%b %d, %Y %I:%M %p")
 
         if not pages_data:
-            pages_data = [{"page": 1, "text": f"Document: {file.filename}"}]
+            pages_data = [{"page": 1, "text": f"Document: {safe_filename}"}]
 
         chunk_count = await vector_service.add_document(
             doc_id=doc_id,
-            filename=file.filename,
+            filename=safe_filename,
             pages_data=pages_data,
             meta={
                 "upload_date": upload_date,
@@ -199,7 +296,7 @@ async def upload_pdf(file: UploadFile = File(...), current_user: dict = Depends(
 
         return DocumentInfo(
             id=doc_id,
-            filename=file.filename,
+            filename=safe_filename,
             upload_date=upload_date,
             file_size=meta["file_size"],
             page_count=meta["page_count"],
@@ -209,10 +306,18 @@ async def upload_pdf(file: UploadFile = File(...), current_user: dict = Depends(
             username=current_user["username"],
         )
 
+    except HTTPException:
+        if target_path.exists():
+            target_path.unlink(missing_ok=True)
+        raise
     except Exception as e:
         if target_path.exists():
             target_path.unlink(missing_ok=True)
-        raise HTTPException(status_code=500, detail=f"Failed to process PDF: {str(e)}")
+        logger.error(f"Error processing PDF upload: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Failed to process and index PDF: {str(e)}",
+        )
 
 
 @app.get("/api/documents/{doc_id}/download")
@@ -223,13 +328,16 @@ async def download_document(doc_id: str, current_user: dict = Depends(get_curren
     )
     if not doc_meta:
         raise HTTPException(
-            status_code=404, detail="Document not found or you do not have permission to access it."
+            status_code=404,
+            detail="Document not found or you do not have permission to access it.",
         )
 
     for f in UPLOADS_DIR.glob(f"{doc_id}_*"):
         if f.is_file():
             return FileResponse(
-                path=str(f), filename=doc_meta["filename"], media_type="application/pdf"
+                path=str(f),
+                filename=doc_meta["filename"],
+                media_type="application/pdf",
             )
 
     raise HTTPException(status_code=404, detail="Original PDF file is missing on server")
@@ -243,7 +351,8 @@ async def delete_document(doc_id: str, current_user: dict = Depends(get_current_
     )
     if not doc_meta:
         raise HTTPException(
-            status_code=404, detail="Document not found or you do not have permission to delete it."
+            status_code=404,
+            detail="Document not found or you do not have permission to delete it.",
         )
 
     for f in UPLOADS_DIR.glob(f"{doc_id}_*"):
@@ -260,8 +369,9 @@ async def delete_document(doc_id: str, current_user: dict = Depends(get_current_
 
 
 @app.post("/api/quiz/generate", response_model=QuizResponse)
+@limiter.limit(settings.rate_limit_chat)
 async def generate_mock_test(
-    req: GenerateQuizRequest, current_user: dict = Depends(get_current_user)
+    request: Request, req: GenerateQuizRequest, current_user: dict = Depends(get_current_user)
 ):
     is_admin = current_user.get("role") == "Admin"
     doc = vector_service.get_document_by_id(
@@ -288,7 +398,9 @@ async def generate_mock_test(
 @app.post("/api/quiz/submit")
 async def submit_quiz(req: SubmitQuizRequest, current_user: dict = Depends(get_current_user)):
     vector_service.record_test_result(
-        score=req.score, total_questions=req.total_questions, user_id=current_user["id"]
+        score=req.score,
+        total_questions=req.total_questions,
+        user_id=current_user["id"],
     )
     return {
         "message": "Quiz result recorded successfully",
@@ -302,8 +414,9 @@ async def submit_quiz(req: SubmitQuizRequest, current_user: dict = Depends(get_c
 
 
 @app.post("/api/revision/generate", response_model=RevisionResponse)
+@limiter.limit(settings.rate_limit_chat)
 async def generate_revision(
-    req: GenerateRevisionRequest, current_user: dict = Depends(get_current_user)
+    request: Request, req: GenerateRevisionRequest, current_user: dict = Depends(get_current_user)
 ):
     is_admin = current_user.get("role") == "Admin"
     doc = vector_service.get_document_by_id(
@@ -330,7 +443,10 @@ async def generate_revision(
 
 
 @app.post("/api/chat", response_model=ChatResponse)
-async def rag_chat(req: ChatRequest, current_user: dict = Depends(get_current_user)):
+@limiter.limit(settings.rate_limit_chat)
+async def rag_chat(
+    request: Request, req: ChatRequest, current_user: dict = Depends(get_current_user)
+):
     is_admin = current_user.get("role") == "Admin"
     if req.document_id:
         doc = vector_service.get_document_by_id(
@@ -369,13 +485,13 @@ async def login(req: LoginRequest):
 async def change_password(
     req: ChangePasswordRequest, current_user: dict = Depends(get_current_user)
 ):
-    # Enforce that students can only change their own password
     if (
         current_user.get("role") != "Admin"
         and req.username.strip().lower() != current_user["username"].strip().lower()
     ):
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="You can only change your own password."
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You can only change your own password.",
         )
     try:
         auth_service.change_password(req.username, req.current_password, req.new_password)

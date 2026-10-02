@@ -61,7 +61,7 @@ Output ONLY a single floating-point number representing faithfulness (e.g. 0.95)
     try:
         raw_res, _ = await llm_service.generate_completion(
             prompt=prompt,
-            system_prompt="You are an automated evaluation judge. Respond only with a number from 0.0 to 1.0."
+            system_prompt="You are an automated evaluation judge. Respond only with a number from 0.0 to 1.0.",
         )
         score_match = re.search(r"(\d+(?:\.\d+)?)", raw_res)
         if score_match:
@@ -73,8 +73,7 @@ Output ONLY a single floating-point number representing faithfulness (e.g. 0.95)
 
 
 async def evaluate_configuration(
-    exp_config: Dict[str, Any],
-    dataset: List[Dict[str, Any]]
+    exp_config: Dict[str, Any], dataset: List[Dict[str, Any]]
 ) -> Dict[str, Any]:
     chunk_size = exp_config["chunk_size"]
     chunk_overlap = exp_config["chunk_overlap"]
@@ -86,14 +85,12 @@ async def evaluate_configuration(
     pages_data = pdf_service.extract_text_and_pages(SAMPLE_DOC)
 
     # Initialize dedicated isolated in-memory chroma collection
-    temp_client = chromadb.EphemeralClient(
-        settings=ChromaSettings(anonymized_telemetry=False)
-    )
+    temp_client = chromadb.EphemeralClient(settings=ChromaSettings(anonymized_telemetry=False))
     ef = embedding_functions.DefaultEmbeddingFunction()
     collection = temp_client.get_or_create_collection(
         name=f"eval_col_{chunk_size}_{chunk_overlap}",
         embedding_function=ef,
-        metadata={"hnsw:space": "cosine"}
+        metadata={"hnsw:space": "cosine"},
     )
 
     # Chunk and index
@@ -102,16 +99,20 @@ async def evaluate_configuration(
     metas = []
     idx = 0
     for p in pages_data:
-        chunks = vector_service._split_into_chunks(p["text"], chunk_size=chunk_size, overlap=chunk_overlap)
+        chunks = vector_service._split_into_chunks(
+            p["text"], chunk_size=chunk_size, overlap=chunk_overlap
+        )
         for c in chunks:
             all_chunks.append(c)
             ids.append(f"chunk_{idx}")
-            metas.append({
-                "document_id": "eval_doc_os",
-                "filename": "Operating_Systems_Concurrency.pdf",
-                "page": p["page"],
-                "chunk_index": idx
-            })
+            metas.append(
+                {
+                    "document_id": "eval_doc_os",
+                    "filename": "Operating_Systems_Concurrency.pdf",
+                    "page": p["page"],
+                    "chunk_index": idx,
+                }
+            )
             idx += 1
 
     collection.add(ids=ids, documents=all_chunks, metadatas=metas)
@@ -167,7 +168,12 @@ async def evaluate_configuration(
 
         # Generate Grounded RAG Answer via offline heuristic
         context_chunks = [
-            {"text": doc_text, "filename": m.get("filename", ""), "page": m.get("page", 1), "similarity": 0.9}
+            {
+                "text": doc_text,
+                "filename": m.get("filename", ""),
+                "page": m.get("page", 1),
+                "similarity": 0.9,
+            }
             for doc_text, m in zip(retrieved_docs[:3], retrieved_metas[:3])
         ]
 
@@ -177,9 +183,15 @@ async def evaluate_configuration(
         for c in context_chunks:
             for line in c["text"].split(". "):
                 line_clean = line.strip()
-                if len(line_clean) > 20 and any(w in line_clean.lower() for w in q_words if len(w) > 3):
+                if len(line_clean) > 20 and any(
+                    w in line_clean.lower() for w in q_words if len(w) > 3
+                ):
                     key_sentences.append(line_clean)
-        generated_answer = " ".join(key_sentences) if key_sentences else (context_chunks[0]["text"] if context_chunks else "")
+        generated_answer = (
+            " ".join(key_sentences)
+            if key_sentences
+            else (context_chunks[0]["text"] if context_chunks else "")
+        )
 
         # Check expected keywords presence
         gen_lower = generated_answer.lower()
@@ -188,7 +200,9 @@ async def evaluate_configuration(
 
         # Optional LLM Judge
         if settings.groq_api_key:
-            score = await judge_faithfulness_groq(q, "\n".join(retrieved_docs[:2]), generated_answer)
+            score = await judge_faithfulness_groq(
+                q, "\n".join(retrieved_docs[:2]), generated_answer
+            )
             if score is not None:
                 judge_scores.append(score)
 
@@ -214,31 +228,33 @@ async def evaluate_configuration(
         "citation_page_accuracy": round(avg_page_acc, 4),
         "keyword_coverage_rate": round(avg_keyword_rate, 4),
         "avg_latency_ms": round(avg_latency, 2),
-        "llm_judge_faithfulness": round(avg_judge, 4) if avg_judge is not None else "N/A (Offline)"
+        "llm_judge_faithfulness": round(avg_judge, 4) if avg_judge is not None else "N/A (Offline)",
     }
 
 
-def generate_markdown_report(results: List[Dict[str, Any]], thresholds: Dict[str, Any], winner_name: str, rationale: str) -> str:
+def generate_markdown_report(
+    results: List[Dict[str, Any]], thresholds: Dict[str, Any], winner_name: str, rationale: str
+) -> str:
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
     md = f"""# RAG Evaluation Benchmark Report
 
 *Generated on: {timestamp}*  
-*Dataset: {results[0]['total_queries']} golden question/answer/page triples from `Operating_Systems_Concurrency.pdf`*
+*Dataset: {results[0]["total_queries"]} golden question/answer/page triples from `Operating_Systems_Concurrency.pdf`*
 
 ---
 
 ## 1. Executive Summary & Configuration Comparison
 
-| Metric | Threshold Target | {results[0]['config_name']} | {results[1]['config_name']} | Winning Configuration |
+| Metric | Threshold Target | {results[0]["config_name"]} | {results[1]["config_name"]} | Winning Configuration |
 | :--- | :---: | :---: | :---: | :---: |
-| **Retrieval Hit@1** | $\\ge {thresholds.get('min_hit_at_1', 0.60):.2f}$ | **{results[0]['hit_at_1']*100:.1f}%** | {results[1]['hit_at_1']*100:.1f}% | {'✅ ' + results[0]['config_name'] if results[0]['hit_at_1'] >= results[1]['hit_at_1'] else '✅ ' + results[1]['config_name']} |
-| **Retrieval Hit@3** | $\\ge {thresholds.get('min_hit_at_3', 0.80):.2f}$ | **{results[0]['hit_at_3']*100:.1f}%** | {results[1]['hit_at_3']*100:.1f}% | {'✅ ' + results[0]['config_name'] if results[0]['hit_at_3'] >= results[1]['hit_at_3'] else '✅ ' + results[1]['config_name']} |
-| **Retrieval Hit@5** | $\\ge {thresholds.get('min_hit_at_5', 0.90):.2f}$ | **{results[0]['hit_at_5']*100:.1f}%** | {results[1]['hit_at_5']*100:.1f}% | {'✅ ' + results[0]['config_name'] if results[0]['hit_at_5'] >= results[1]['hit_at_5'] else '✅ ' + results[1]['config_name']} |
-| **Mean Reciprocal Rank (MRR)** | $\\ge {thresholds.get('min_mrr', 0.70):.2f}$ | **{results[0]['mrr']:.4f}** | {results[1]['mrr']:.4f} | {'✅ ' + results[0]['config_name'] if results[0]['mrr'] >= results[1]['mrr'] else '✅ ' + results[1]['config_name']} |
-| **Citation Page Accuracy** | $\\ge {thresholds.get('min_citation_page_accuracy', 0.80):.2f}$ | **{results[0]['citation_page_accuracy']*100:.1f}%** | {results[1]['citation_page_accuracy']*100:.1f}% | {'✅ ' + results[0]['config_name'] if results[0]['citation_page_accuracy'] >= results[1]['citation_page_accuracy'] else '✅ ' + results[1]['config_name']} |
-| **Keyword Coverage Rate** | $\\ge {thresholds.get('min_keyword_contains_rate', 0.75):.2f}$ | **{results[0]['keyword_coverage_rate']*100:.1f}%** | {results[1]['keyword_coverage_rate']*100:.1f}% | {'✅ ' + results[0]['config_name'] if results[0]['keyword_coverage_rate'] >= results[1]['keyword_coverage_rate'] else '✅ ' + results[1]['config_name']} |
-| **Average Latency** | Baseline | **{results[0]['avg_latency_ms']:.2f} ms** | {results[1]['avg_latency_ms']:.2f} ms | {'✅ ' + results[0]['config_name'] if results[0]['avg_latency_ms'] <= results[1]['avg_latency_ms'] else '✅ ' + results[1]['config_name']} |
-| **LLM-as-Judge Faithfulness** | $\\ge 0.85$ | {results[0]['llm_judge_faithfulness']} | {results[1]['llm_judge_faithfulness']} | Deterministic Offline Mode |
+| **Retrieval Hit@1** | $\\ge {thresholds.get("min_hit_at_1", 0.60):.2f}$ | **{results[0]["hit_at_1"] * 100:.1f}%** | {results[1]["hit_at_1"] * 100:.1f}% | {"✅ " + results[0]["config_name"] if results[0]["hit_at_1"] >= results[1]["hit_at_1"] else "✅ " + results[1]["config_name"]} |
+| **Retrieval Hit@3** | $\\ge {thresholds.get("min_hit_at_3", 0.80):.2f}$ | **{results[0]["hit_at_3"] * 100:.1f}%** | {results[1]["hit_at_3"] * 100:.1f}% | {"✅ " + results[0]["config_name"] if results[0]["hit_at_3"] >= results[1]["hit_at_3"] else "✅ " + results[1]["config_name"]} |
+| **Retrieval Hit@5** | $\\ge {thresholds.get("min_hit_at_5", 0.90):.2f}$ | **{results[0]["hit_at_5"] * 100:.1f}%** | {results[1]["hit_at_5"] * 100:.1f}% | {"✅ " + results[0]["config_name"] if results[0]["hit_at_5"] >= results[1]["hit_at_5"] else "✅ " + results[1]["config_name"]} |
+| **Mean Reciprocal Rank (MRR)** | $\\ge {thresholds.get("min_mrr", 0.70):.2f}$ | **{results[0]["mrr"]:.4f}** | {results[1]["mrr"]:.4f} | {"✅ " + results[0]["config_name"] if results[0]["mrr"] >= results[1]["mrr"] else "✅ " + results[1]["config_name"]} |
+| **Citation Page Accuracy** | $\\ge {thresholds.get("min_citation_page_accuracy", 0.80):.2f}$ | **{results[0]["citation_page_accuracy"] * 100:.1f}%** | {results[1]["citation_page_accuracy"] * 100:.1f}% | {"✅ " + results[0]["config_name"] if results[0]["citation_page_accuracy"] >= results[1]["citation_page_accuracy"] else "✅ " + results[1]["config_name"]} |
+| **Keyword Coverage Rate** | $\\ge {thresholds.get("min_keyword_contains_rate", 0.75):.2f}$ | **{results[0]["keyword_coverage_rate"] * 100:.1f}%** | {results[1]["keyword_coverage_rate"] * 100:.1f}% | {"✅ " + results[0]["config_name"] if results[0]["keyword_coverage_rate"] >= results[1]["keyword_coverage_rate"] else "✅ " + results[1]["config_name"]} |
+| **Average Latency** | Baseline | **{results[0]["avg_latency_ms"]:.2f} ms** | {results[1]["avg_latency_ms"]:.2f} ms | {"✅ " + results[0]["config_name"] if results[0]["avg_latency_ms"] <= results[1]["avg_latency_ms"] else "✅ " + results[1]["config_name"]} |
+| **LLM-as-Judge Faithfulness** | $\\ge 0.85$ | {results[0]["llm_judge_faithfulness"]} | {results[1]["llm_judge_faithfulness"]} | Deterministic Offline Mode |
 
 ---
 
@@ -253,7 +269,7 @@ def generate_markdown_report(results: List[Dict[str, Any]], thresholds: Dict[str
 
 ## 3. Methodology & Offline Reproducibility
 - **100% Deterministic & Offline:** Runs entirely against ChromaDB with local cosine similarity and heuristic keyword verification. No external API keys required.
-- **Automated CI Regression Gate:** Integrated into CI pipelines. Fails build if `Hit@3` falls below `{thresholds.get('min_hit_at_3', 0.80):.2f}`.
+- **Automated CI Regression Gate:** Integrated into CI pipelines. Fails build if `Hit@3` falls below `{thresholds.get("min_hit_at_3", 0.80):.2f}`.
 """
     return md
 
@@ -283,7 +299,7 @@ async def run_evaluation():
         rationale = (
             f"- **{results[0]['config_name']}** (chunk_size={results[0]['chunk_size']}, overlap={results[0]['chunk_overlap']}) "
             f"preserves broader semantic context across multi-sentence paragraphs, yielding higher MRR ({results[0]['mrr']:.4f}) "
-            f"and superior citation page accuracy ({results[0]['citation_page_accuracy']*100:.1f}%).\n"
+            f"and superior citation page accuracy ({results[0]['citation_page_accuracy'] * 100:.1f}%).\n"
             f"- Config B produced smaller chunks that occasionally fractured contextual definitions across chunk boundaries."
         )
     else:
@@ -297,13 +313,25 @@ async def run_evaluation():
     print("\n" + "=" * 70)
     print(f"{'Metric':<30} | {results[0]['config_name']:<18} | {results[1]['config_name']:<18}")
     print("-" * 70)
-    print(f"{'Hit@1':<30} | {results[0]['hit_at_1']*100:>16.1f}% | {results[1]['hit_at_1']*100:>16.1f}%")
-    print(f"{'Hit@3':<30} | {results[0]['hit_at_3']*100:>16.1f}% | {results[1]['hit_at_3']*100:>16.1f}%")
-    print(f"{'Hit@5':<30} | {results[0]['hit_at_5']*100:>16.1f}% | {results[1]['hit_at_5']*100:>16.1f}%")
+    print(
+        f"{'Hit@1':<30} | {results[0]['hit_at_1'] * 100:>16.1f}% | {results[1]['hit_at_1'] * 100:>16.1f}%"
+    )
+    print(
+        f"{'Hit@3':<30} | {results[0]['hit_at_3'] * 100:>16.1f}% | {results[1]['hit_at_3'] * 100:>16.1f}%"
+    )
+    print(
+        f"{'Hit@5':<30} | {results[0]['hit_at_5'] * 100:>16.1f}% | {results[1]['hit_at_5'] * 100:>16.1f}%"
+    )
     print(f"{'MRR':<30} | {results[0]['mrr']:>17.4f} | {results[1]['mrr']:>17.4f}")
-    print(f"{'Citation Accuracy':<30} | {results[0]['citation_page_accuracy']*100:>16.1f}% | {results[1]['citation_page_accuracy']*100:>16.1f}%")
-    print(f"{'Keyword Coverage':<30} | {results[0]['keyword_coverage_rate']*100:>16.1f}% | {results[1]['keyword_coverage_rate']*100:>16.1f}%")
-    print(f"{'Avg Latency (ms)':<30} | {results[0]['avg_latency_ms']:>17.2f} | {results[1]['avg_latency_ms']:>17.2f}")
+    print(
+        f"{'Citation Accuracy':<30} | {results[0]['citation_page_accuracy'] * 100:>16.1f}% | {results[1]['citation_page_accuracy'] * 100:>16.1f}%"
+    )
+    print(
+        f"{'Keyword Coverage':<30} | {results[0]['keyword_coverage_rate'] * 100:>16.1f}% | {results[1]['keyword_coverage_rate'] * 100:>16.1f}%"
+    )
+    print(
+        f"{'Avg Latency (ms)':<30} | {results[0]['avg_latency_ms']:>17.2f} | {results[1]['avg_latency_ms']:>17.2f}"
+    )
     print("=" * 70)
     print(f"WINNING STRATEGY: {winner}")
 
@@ -317,10 +345,14 @@ async def run_evaluation():
     min_hit_3 = thresholds.get("min_hit_at_3", 0.80)
     best_hit_3 = max(results[0]["hit_at_3"], results[1]["hit_at_3"])
     if best_hit_3 < min_hit_3:
-        print(f"\n[FAIL] EVALUATION FAILURE: Best Hit@3 ({best_hit_3*100:.1f}%) is below required threshold ({min_hit_3*100:.1f}%)")
+        print(
+            f"\n[FAIL] EVALUATION FAILURE: Best Hit@3 ({best_hit_3 * 100:.1f}%) is below required threshold ({min_hit_3 * 100:.1f}%)"
+        )
         sys.exit(1)
     else:
-        print(f"\n[PASS] EVALUATION SUCCESS: Best Hit@3 ({best_hit_3*100:.1f}%) meets/exceeds threshold ({min_hit_3*100:.1f}%)")
+        print(
+            f"\n[PASS] EVALUATION SUCCESS: Best Hit@3 ({best_hit_3 * 100:.1f}%) meets/exceeds threshold ({min_hit_3 * 100:.1f}%)"
+        )
 
 
 if __name__ == "__main__":
