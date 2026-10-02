@@ -1,32 +1,33 @@
 import hashlib
 import json
-import os
 import uuid
 from datetime import datetime
-from typing import Dict, Any, List, Optional
 from pathlib import Path
+from typing import Any
 
 from app.config import DATA_DIR
 
 USERS_FILE = DATA_DIR / "users.json"
 AUTH_SALT = "study_salt_2026"
 
+
 class AuthService:
-    def __init__(self):
+    def __init__(self, users_file: Path | None = None):
+        self.users_file = users_file or USERS_FILE
         self._init_users_store()
 
     def _hash_password(self, password: str, salt: str = AUTH_SALT) -> str:
-        return hashlib.sha256(f"{password}_{salt}".encode("utf-8")).hexdigest()
+        return hashlib.sha256(f"{password}_{salt}".encode()).hexdigest()
 
     def _generate_token(self, user_id: str, username: str) -> str:
-        token_hash = hashlib.sha256(f"{user_id}_{username}_{AUTH_SALT}".encode("utf-8")).hexdigest()[:24]
+        token_hash = hashlib.sha256(f"{user_id}_{username}_{AUTH_SALT}".encode()).hexdigest()[:24]
         return f"dsc_tok_{user_id}_{token_hash}"
 
     def _init_users_store(self):
         """
         Seeds 5 default pre-configured accounts if users.json does not exist.
         """
-        if not USERS_FILE.exists():
+        if not self.users_file.exists():
             default_users = {
                 "admin": {
                     "id": "usr_admin",
@@ -79,21 +80,21 @@ class AuthService:
                     "created_at": "Sep 15, 2026",
                 },
             }
-            with open(USERS_FILE, "w", encoding="utf-8") as f:
+            with open(self.users_file, "w", encoding="utf-8") as f:
                 json.dump(default_users, f, indent=2)
 
-    def _read_users(self) -> Dict[str, Any]:
+    def _read_users(self) -> dict[str, Any]:
         try:
-            with open(USERS_FILE, "r", encoding="utf-8") as f:
+            with open(self.users_file, encoding="utf-8") as f:
                 return json.load(f)
         except Exception:
             return {}
 
-    def _write_users(self, data: Dict[str, Any]):
-        with open(USERS_FILE, "w", encoding="utf-8") as f:
+    def _write_users(self, data: dict[str, Any]):
+        with open(self.users_file, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
 
-    def authenticate_user(self, username: str, password: str) -> Optional[Dict[str, Any]]:
+    def authenticate_user(self, username: str, password: str) -> dict[str, Any] | None:
         users = self._read_users()
         user = users.get(username.strip().lower())
         if not user:
@@ -111,10 +112,10 @@ class AuthService:
             "role": user["role"],
             "email": user["email"],
             "created_at": user.get("created_at", "2026"),
-            "token": token
+            "token": token,
         }
 
-    def get_user_from_token(self, token_str: str) -> Optional[Dict[str, Any]]:
+    def get_user_from_token(self, token_str: str) -> dict[str, Any] | None:
         if not token_str or not isinstance(token_str, str):
             return None
         token = token_str.strip()
@@ -124,18 +125,22 @@ class AuthService:
         users = self._read_users()
         for user in users.values():
             expected_token = self._generate_token(user["id"], user["username"])
-            if token == expected_token or token == f"token_{user['username']}" or token.startswith(f"token_{user['username']}_"):
+            if (
+                token == expected_token
+                or token == f"token_{user['username']}"
+                or token.startswith(f"token_{user['username']}_")
+            ):
                 return {
                     "id": user["id"],
                     "username": user["username"],
                     "name": user["name"],
                     "role": user["role"],
                     "email": user["email"],
-                    "created_at": user.get("created_at", "2026")
+                    "created_at": user.get("created_at", "2026"),
                 }
         return None
 
-    def get_user_by_id(self, user_id: str) -> Optional[Dict[str, Any]]:
+    def get_user_by_id(self, user_id: str) -> dict[str, Any] | None:
         users = self._read_users()
         for user in users.values():
             if user.get("id") == user_id:
@@ -145,7 +150,7 @@ class AuthService:
                     "name": user["name"],
                     "role": user["role"],
                     "email": user["email"],
-                    "created_at": user.get("created_at", "2026")
+                    "created_at": user.get("created_at", "2026"),
                 }
         return None
 
@@ -164,7 +169,9 @@ class AuthService:
         self._write_users(users)
         return True
 
-    def forgot_password_recovery(self, username: str, recovery_input: str, new_password: str) -> bool:
+    def forgot_password_recovery(
+        self, username: str, recovery_input: str, new_password: str
+    ) -> bool:
         """
         Validates recovery via either recovery_code or email, then sets new password.
         """
@@ -179,7 +186,9 @@ class AuthService:
         is_code_match = user.get("recovery_code", "").strip().lower() == recovery_val
 
         if not (is_email_match or is_code_match):
-            raise ValueError("Recovery email or secret code did not match our records for this username")
+            raise ValueError(
+                "Recovery email or secret code did not match our records for this username"
+            )
 
         if len(new_password) < 4:
             raise ValueError("New password must be at least 4 characters long")
@@ -188,7 +197,15 @@ class AuthService:
         self._write_users(users)
         return True
 
-    def register_user(self, username: str, password: str, name: str, email: str, role: str = "Student", recovery_code: str = "") -> Dict[str, Any]:
+    def register_user(
+        self,
+        username: str,
+        password: str,
+        name: str,
+        email: str,
+        role: str = "Student",
+        recovery_code: str = "",
+    ) -> dict[str, Any]:
         users = self._read_users()
         user_key = username.strip().lower()
         if user_key in users:
@@ -215,10 +232,10 @@ class AuthService:
             "name": new_user["name"],
             "role": new_user["role"],
             "email": new_user["email"],
-            "created_at": new_user["created_at"]
+            "created_at": new_user["created_at"],
         }
 
-    def get_all_users(self, is_admin: bool = False) -> List[Dict[str, Any]]:
+    def get_all_users(self, is_admin: bool = False) -> list[dict[str, Any]]:
         users = self._read_users()
         output = []
         for u in users.values():
@@ -256,5 +273,6 @@ class AuthService:
         users[user_key]["password_hash"] = self._hash_password(new_password)
         self._write_users(users)
         return True
+
 
 auth_service = AuthService()

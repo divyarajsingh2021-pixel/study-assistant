@@ -1,31 +1,27 @@
-from typing import List, Dict, Any, Optional
-from app.services.vector_service import vector_service
+from app.models.schemas import ChatMessage, ChatResponse, Citation
 from app.services.llm_service import llm_service
-from app.models.schemas import Citation, ChatResponse, ChatMessage
+from app.services.vector_service import vector_service
+
 
 class RAGService:
     async def answer_question(
         self,
         question: str,
-        document_id: Optional[str] = None,
-        history: Optional[List[ChatMessage]] = None,
-        user_id: Optional[str] = None,
-        is_admin: bool = False
+        document_id: str | None = None,
+        history: list[ChatMessage] | None = None,
+        user_id: str | None = None,
+        is_admin: bool = False,
     ) -> ChatResponse:
         # Retrieve top relevant chunks from ChromaDB for this user
         chunks = await vector_service.query_relevant_chunks(
-            query=question,
-            document_id=document_id,
-            user_id=user_id,
-            is_admin=is_admin,
-            n_results=4
+            query=question, document_id=document_id, user_id=user_id, is_admin=is_admin, n_results=4
         )
 
         if not chunks:
             return ChatResponse(
                 answer="I couldn't find any relevant study material in your uploaded documents for this question. Please upload notes or select a document from your library.",
                 citations=[],
-                provider_used="System"
+                provider_used="System",
             )
 
         # Build citations
@@ -34,13 +30,15 @@ class RAGService:
             snippet_text = c["text"]
             if len(snippet_text) > 280:
                 snippet_text = snippet_text[:280].strip() + "..."
-            citations.append(Citation(
-                document_id=c["document_id"],
-                document_name=c["filename"],
-                page=c["page"],
-                snippet=snippet_text,
-                similarity_score=c["similarity"]
-            ))
+            citations.append(
+                Citation(
+                    document_id=c["document_id"],
+                    document_name=c["filename"],
+                    page=c["page"],
+                    snippet=snippet_text,
+                    similarity_score=c["similarity"],
+                )
+            )
 
         # Format context for prompt
         context_parts = []
@@ -80,7 +78,9 @@ Helpful & Grounded Explanation:"""
             for c in chunks:
                 for line in c["text"].split(". "):
                     line_clean = line.strip()
-                    if len(line_clean) > 25 and any(w in line_clean.lower() for w in q_words if len(w) > 3):
+                    if len(line_clean) > 25 and any(
+                        w in line_clean.lower() for w in q_words if len(w) > 3
+                    ):
                         key_sentences.append(f"• {line_clean}.")
                         if len(key_sentences) >= 4:
                             break
@@ -90,19 +90,21 @@ Helpful & Grounded Explanation:"""
             if not key_sentences:
                 return f"Based on your study material in **{chunks[0]['filename']}** (Page {chunks[0]['page']}):\n\n{chunks[0]['text'][:400]}..."
 
-            return f"Based on your uploaded study notes in **{chunks[0]['filename']}** (Page {chunks[0]['page']}):\n\n" + "\n".join(key_sentences)
+            return (
+                f"Based on your uploaded study notes in **{chunks[0]['filename']}** (Page {chunks[0]['page']}):\n\n"
+                + "\n".join(key_sentences)
+            )
 
         answer_text, provider_name = await llm_service.generate_completion(
             prompt=prompt,
             system_prompt=system_prompt,
             json_mode=False,
-            fallback_offline_fn=offline_fallback
+            fallback_offline_fn=offline_fallback,
         )
 
         return ChatResponse(
-            answer=answer_text.strip(),
-            citations=citations,
-            provider_used=provider_name
+            answer=answer_text.strip(), citations=citations, provider_used=provider_name
         )
+
 
 rag_service = RAGService()

@@ -29,3 +29,11 @@ yarn-error.log*
 # OS specific files
 .DS_Store
 Thumbs.db
+
+# Test, coverage & linter caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
