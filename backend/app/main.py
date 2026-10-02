@@ -105,6 +105,7 @@ async def root():
     return {"status": "online", "name": "DSC AI Backend", "version": "2.0.0"}
 
 
+@app.get("/health", response_model=HealthResponse)
 @app.get("/api/health", response_model=HealthResponse)
 async def get_health(current_user: dict | None = Depends(get_current_user_optional)):
     provider_status = await llm_service.check_provider_status()
