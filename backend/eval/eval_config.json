@@ -1,0 +1,24 @@
+{
+  "thresholds": {
+    "min_hit_at_1": 0.60,
+    "min_hit_at_3": 0.80,
+    "min_hit_at_5": 0.90,
+    "min_mrr": 0.70,
+    "min_citation_page_accuracy": 0.80,
+    "min_keyword_contains_rate": 0.75
+  },
+  "chunking_experiments": [
+    {
+      "name": "Config A (Balanced)",
+      "chunk_size": 800,
+      "chunk_overlap": 150,
+      "description": "Standard balanced semantic chunking for comprehensive context retention."
+    },
+    {
+      "name": "Config B (Fine-Grained)",
+      "chunk_size": 400,
+      "chunk_overlap": 80,
+      "description": "Fine-grained sentence chunking optimizing for targeted snippet retrieval."
+    }
+  ]
+}

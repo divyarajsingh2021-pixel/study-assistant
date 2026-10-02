@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "question": "What is the definition of a process in operating systems?",
+    "ground_truth_answer": "A process is defined as a program in execution, encompassing the text section, current activity tracked by the Program Counter and processor registers, stack, data section, and heap.",
+    "source_page": 1,
+    "expected_keywords": ["program in execution", "text section", "program counter", "stack", "heap"],
+    "topic": "Process Concept"
+  },
+  {
+    "id": 2,
+    "question": "What is a Process Control Block (PCB) and what key information does it store?",
+    "ground_truth_answer": "The PCB is the central OS data structure used to maintain all information associated with an active process, including Process State, Program Counter, CPU registers, CPU-scheduling information, memory-management info, and accounting/I/O status.",
+    "source_page": 1,
+    "expected_keywords": ["process control block", "process state", "program counter", "cpu registers"],
+    "topic": "Process Concept"
+  },
+  {
+    "id": 3,
+    "question": "What are the five primary process states recorded in the PCB?",
+    "ground_truth_answer": "The process states recorded in the PCB include New, Ready, Running, Waiting, and Terminated.",
+    "source_page": 1,
+    "expected_keywords": ["new", "ready", "running", "waiting", "terminated"],
+    "topic": "Process States"
+  },
+  {
+    "id": 4,
+    "question": "What memory components does a process stack hold?",
+    "ground_truth_answer": "A process stack contains temporary data such as function parameters, return addresses, and local variables.",
+    "source_page": 1,
+    "expected_keywords": ["function parameters", "return addresses", "local variables", "temporary data"],
+    "topic": "Process Memory"
+  },
+  {
+    "id": 5,
+    "question": "What is the purpose of the heap in a process memory layout?",
+    "ground_truth_answer": "The heap is used for runtime dynamic memory allocation.",
+    "source_page": 1,
+    "expected_keywords": ["heap", "runtime", "dynamic memory", "allocation"],
+    "topic": "Process Memory"
+  },
+  {
+    "id": 6,
+    "question": "How is a thread defined compared to a process?",
+    "ground_truth_answer": "A thread is the smallest schedulable unit of CPU utilization, commonly termed a lightweight process.",
+    "source_page": 1,
+    "expected_keywords": ["smallest schedulable unit", "cpu utilization", "lightweight process"],
+    "topic": "Threads"
+  },
+  {
+    "id": 7,
+    "question": "What resources are shared among threads belonging to the same process?",
+    "ground_truth_answer": "Threads belonging to the same process share their code section, data section, and OS resources like open files and signals.",
+    "source_page": 1,
+    "expected_keywords": ["code section", "data section", "open files", "signals"],
+    "topic": "Threads"
+  },
+  {
+    "id": 8,
+    "question": "What unique state does each thread maintain individually?",
+    "ground_truth_answer": "Each thread maintains its own unique Thread ID, Program Counter, register set, and private execution stack.",
+    "source_page": 1,
+    "expected_keywords": ["thread id", "program counter", "register set", "execution stack"],
+    "topic": "Threads"
+  },
+  {
+    "id": 9,
+    "question": "What are the key benefits of multithreading in applications?",
+    "ground_truth_answer": "Benefits include high responsiveness in interactive applications, efficient resource sharing without costly IPC, economy due to lower context switching overhead, and scalability across multicore hardware.",
+    "source_page": 1,
+    "expected_keywords": ["responsiveness", "resource sharing", "context switching", "scalability"],
+    "topic": "Threads"
+  },
+  {
+    "id": 10,
+    "question": "What is a race condition in concurrent programming?",
+    "ground_truth_answer": "A race condition occurs when multiple concurrent threads or processes access and manipulate shared data, and the final outcome depends on the arbitrary execution order.",
+    "source_page": 2,
+    "expected_keywords": ["race condition", "shared data", "execution order"],
+    "topic": "Synchronization"
+  },
+  {
+    "id": 11,
+    "question": "What are the three mandatory requirements for solving the Critical-Section Problem?",
+    "ground_truth_answer": "Any valid solution must satisfy: 1. Mutual Exclusion, 2. Progress, and 3. Bounded Waiting.",
+    "source_page": 2,
+    "expected_keywords": ["mutual exclusion", "progress", "bounded waiting"],
+    "topic": "Critical Section"
+  },
+  {
+    "id": 12,
+    "question": "How is the Mutual Exclusion requirement defined for critical sections?",
+    "ground_truth_answer": "Mutual Exclusion states that if process Pi is executing in its critical section, no other process can be executing in its critical section.",
+    "source_page": 2,
+    "expected_keywords": ["mutual exclusion", "critical section", "no other process"],
+    "topic": "Critical Section"
+  },
+  {
+    "id": 13,
+    "question": "What does the Progress requirement ensure in critical section synchronization?",
+    "ground_truth_answer": "Progress ensures that if no process is in its critical section, only processes not in remainder sections can decide who enters next, and selection cannot be postponed indefinitely.",
+    "source_page": 2,
+    "expected_keywords": ["progress", "remainder section", "postponed indefinitely"],
+    "topic": "Critical Section"
+  },
+  {
+    "id": 14,
+    "question": "What is the definition of Bounded Waiting?",
+    "ground_truth_answer": "Bounded Waiting means there must exist a bound on the number of times other processes are allowed to enter their critical sections after a process has requested entry before that request is granted.",
+    "source_page": 2,
+    "expected_keywords": ["bounded waiting", "bound", "requested entry"],
+    "topic": "Critical Section"
+  },
+  {
+    "id": 15,
+    "question": "How does a Mutex Lock operate?",
+    "ground_truth_answer": "A Mutex Lock is a boolean synchronization lock where a process must acquire the lock before entering its critical section and release it upon departure.",
+    "source_page": 2,
+    "expected_keywords": ["mutex lock", "boolean", "acquire", "release"],
+    "topic": "Mutexes"
+  },
+  {
+    "id": 16,
+    "question": "Who introduced the Semaphore concept and what are its atomic operations?",
+    "ground_truth_answer": "A Semaphore is an integer synchronization variable introduced by Edsger Dijkstra, manipulated strictly through two atomic operations: wait() and signal().",
+    "source_page": 2,
+    "expected_keywords": ["semaphore", "dijkstra", "wait", "signal"],
+    "topic": "Semaphores"
+  },
+  {
+    "id": 17,
+    "question": "What is the difference between Counting Semaphores and Binary Semaphores?",
+    "ground_truth_answer": "Counting Semaphores range over an unrestricted domain to control access to resource pools, while Binary Semaphores are constrained to 0 and 1, functioning identically to mutexes.",
+    "source_page": 2,
+    "expected_keywords": ["counting semaphores", "binary semaphores", "0 and 1", "mutexes"],
+    "topic": "Semaphores"
+  },
+  {
+    "id": 18,
+    "question": "What is the formal definition of a deadlock in operating systems?",
+    "ground_truth_answer": "A deadlock is a condition in which a set of concurrent processes are permanently blocked because each process holds a resource and waits for another resource held by another process in the set.",
+    "source_page": 3,
+    "expected_keywords": ["deadlock", "permanently blocked", "holds a resource", "waits"],
+    "topic": "Deadlocks"
+  },
+  {
+    "id": 19,
+    "question": "What are the four Coffman conditions necessary for a deadlock to arise?",
+    "ground_truth_answer": "The four conditions established by Coffman et al. are Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait.",
+    "source_page": 3,
+    "expected_keywords": ["coffman", "mutual exclusion", "hold and wait", "no preemption", "circular wait"],
+    "topic": "Deadlocks"
+  },
+  {
+    "id": 20,
+    "question": "What is the Hold and Wait condition for deadlocks?",
+    "ground_truth_answer": "Hold and Wait requires that a process must currently hold at least one resource and request additional resources held by other processes.",
+    "source_page": 3,
+    "expected_keywords": ["hold and wait", "hold at least one resource", "request additional resources"],
+    "topic": "Deadlocks"
+  },
+  {
+    "id": 21,
+    "question": "What does No Preemption mean in the context of deadlock conditions?",
+    "ground_truth_answer": "No Preemption means resources cannot be forcibly seized; they can only be voluntarily released by the holding process.",
+    "source_page": 3,
+    "expected_keywords": ["no preemption", "forcibly seized", "voluntarily released"],
+    "topic": "Deadlocks"
+  },
+  {
+    "id": 22,
+    "question": "How is the Circular Wait condition characterized?",
+    "ground_truth_answer": "Circular Wait exists when a closed chain of processes exists where each process holds resources required by the subsequent process in the loop.",
+    "source_page": 3,
+    "expected_keywords": ["circular wait", "closed chain", "subsequent process"],
+    "topic": "Deadlocks"
+  },
+  {
+    "id": 23,
+    "question": "How does Deadlock Prevention work as a handling strategy?",
+    "ground_truth_answer": "Deadlock Prevention handles deadlocks by invalidating at least one of the four necessary conditions.",
+    "source_page": 3,
+    "expected_keywords": ["deadlock prevention", "invalidating", "four necessary conditions"],
+    "topic": "Deadlock Strategies"
+  },
+  {
+    "id": 24,
+    "question": "What algorithm is used for Deadlock Avoidance to ensure safe states?",
+    "ground_truth_answer": "Deadlock Avoidance uses Dijkstra's Banker's Algorithm to ensure the system always remains in a safe state.",
+    "source_page": 3,
+    "expected_keywords": ["deadlock avoidance", "banker's algorithm", "safe state", "dijkstra"],
+    "topic": "Deadlock Strategies"
+  },
+  {
+    "id": 25,
+    "question": "What are the three primary strategies for handling deadlocks?",
+    "ground_truth_answer": "The three strategies are Deadlock Prevention, Deadlock Avoidance, and Deadlock Detection with recovery.",
+    "source_page": 3,
+    "expected_keywords": ["prevention", "avoidance", "detection", "recovery"],
+    "topic": "Deadlock Strategies"
+  }
+]
