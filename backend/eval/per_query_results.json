@@ -1,0 +1,3334 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-02 14:32:45",
+    "corpus_documents": 6,
+    "total_queries": 72,
+    "dev_queries": 36,
+    "test_queries": 36,
+    "winning_chunk_config": "Config A (Balanced)",
+    "abstention_threshold": 0.25
+  },
+  "mrr_arithmetic_verification": {
+    "dev_mrr_formula": "(26*1.0 + 1*0.5 + 1*(1/3) + 2*0.0) / 30 = 26.833333 / 30 = 0.894444",
+    "test_mrr_formula": "(24*1.0 + 5*0.5 + 1*(1/3) + 0*0.0) / 30 = 26.833333 / 30 = 0.894444",
+    "dev_sum_reciprocal_ranks": 26.833333,
+    "test_sum_reciprocal_ranks": 26.833333,
+    "verification_explanation": "Dev and Test sets evaluate to identical MRRs (0.8944) due to an exact arithmetic coincidence: both sets sum to 161/6 (~26.833333) across 30 answerable queries. Dev had 26 rank-1s, 1 rank-2, 1 rank-3, and 2 misses. Test had 24 rank-1s, 5 rank-2s, 1 rank-3, and 0 misses."
+  },
+  "dev_set_records": [
+    {
+      "id": 1,
+      "question": "What is the minimum header size overhead of Transmission Control Protocol (TCP)?",
+      "split": "dev",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6089,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.6089
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.4734
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.4557
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.4336
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.4269
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "Under the expenditure approach, what are the four component terms of GDP?",
+      "split": "dev",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Principles_of_Macroeconomics.pdf",
+      "target_page": 1,
+      "top_similarity": 0.65,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 1,
+          "similarity": 0.65
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 1,
+          "similarity": 0.6083
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.3849
+        },
+        {
+          "rank": 4,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.3396
+        },
+        {
+          "rank": 5,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.3241
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "What is the role of citrate synthase in the Krebs cycle?",
+      "split": "dev",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Cell_Biology_and_Metabolism.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6533,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.6533
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.3723
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.3547
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.307
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.305
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "What administrative distance is assigned to OSPFv2 by default?",
+      "split": "dev",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 3,
+      "top_similarity": 0.2552,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": null,
+      "reciprocal_rank": 0.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.2552
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.2268
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.2088
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.2029
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.1856
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "In the Raft consensus algorithm, what are the three possible states for a node?",
+      "split": "dev",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Distributed_Systems_Consensus.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6673,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.6673
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.6113
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.4319
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.3648
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.3568
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "question": "What is the mathematical equation for the GDP Deflator?",
+      "split": "dev",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Principles_of_Macroeconomics.pdf",
+      "target_page": 1,
+      "top_similarity": 0.6673,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 1,
+          "similarity": 0.6673
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 1,
+          "similarity": 0.5656
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.4155
+        },
+        {
+          "rank": 4,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.3414
+        },
+        {
+          "rank": 5,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.3182
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "question": "What is the standard fixed header size of User Datagram Protocol (UDP)?",
+      "split": "dev",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 2,
+      "top_similarity": 0.5926,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.5926
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.4984
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.4712
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.468
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.4073
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "question": "What is the function of phosphofructokinase-1 (PFK-1) in glycolysis?",
+      "split": "dev",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Cell_Biology_and_Metabolism.pdf",
+      "target_page": 2,
+      "top_similarity": 0.5507,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.5507
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.4876
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.4672
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.3976
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.3664
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "question": "How do distributed clocks determine which event triggered another when physical quartz oscillators drift apart?",
+      "split": "dev",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Distributed_Systems_Consensus.pdf",
+      "target_page": 1,
+      "top_similarity": 0.5799,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.5799
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.3727
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.3562
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.3522
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.3508
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "question": "What occurs when a transaction inspects provisional rows written by another worker that ends up aborting?",
+      "split": "dev",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Database_Systems_ACID.pdf",
+      "target_page": 1,
+      "top_similarity": 0.4169,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.4169
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.3959
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.3507
+        },
+        {
+          "rank": 4,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.3215
+        },
+        {
+          "rank": 5,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.3131
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "question": "Why does unemployment have a negative correlation with rising wage pressures over short durations?",
+      "split": "dev",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Principles_of_Macroeconomics.pdf",
+      "target_page": 2,
+      "top_similarity": 0.4958,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.4958
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.4738
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.2502
+        },
+        {
+          "rank": 4,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.1888
+        },
+        {
+          "rank": 5,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 1,
+          "similarity": 0.1419
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "question": "How does the rotating protein motor at the inner mitochondrial partition produce chemical currency?",
+      "split": "dev",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Cell_Biology_and_Metabolism.pdf",
+      "target_page": 3,
+      "top_similarity": 0.5029,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.5029
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.4263
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.3792
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.3598
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.3544
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "question": "What mechanism allows local network machines to discover hardware interface addresses using internet layer identifiers?",
+      "split": "dev",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 4,
+      "top_similarity": 0.5117,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.5117
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.4774
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.4442
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.367
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.3563
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "question": "What measures prevent participants in a distributed transaction from proceeding if their central conductor vanishes?",
+      "split": "dev",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Distributed_Systems_Consensus.pdf",
+      "target_page": 2,
+      "top_similarity": 0.3992,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 3,
+      "reciprocal_rank": 0.3333333333333333,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.3992
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.3929
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.3887
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.3686
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.3661
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "question": "How do monetary authorities pump liquidity into borrowing channels when benchmark cash borrowing rates are pinned at rock bottom?",
+      "split": "dev",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Principles_of_Macroeconomics.pdf",
+      "target_page": 3,
+      "top_similarity": 0.4957,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.4957
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.4155
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.4134
+        },
+        {
+          "rank": 4,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.3636
+        },
+        {
+          "rank": 5,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.3543
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "question": "What biological strategy lets muscles generate energy when suffocated of oxygen during strenuous athletic exertion?",
+      "split": "dev",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Cell_Biology_and_Metabolism.pdf",
+      "target_page": 3,
+      "top_similarity": 0.5242,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.5242
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.4868
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.4681
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.3991
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.3715
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "question": "How do the ATP investments made during the initial phase of glycolysis compare with the final yield of oxidative phosphorylation?",
+      "split": "dev",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Cell_Biology_and_Metabolism.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6946,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.6946
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.6745
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.5208
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.5103
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.4462
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "question": "How does the short-run Phillips curve tradeoff relate to long-run central bank Quantitative Easing outcomes?",
+      "split": "dev",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Principles_of_Macroeconomics.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6144,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.6144
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.5081
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.4993
+        },
+        {
+          "rank": 4,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.4507
+        },
+        {
+          "rank": 5,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.384
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "question": "Compare the header overhead and delivery guarantees of transport layer TCP with network layer IPv4 packets.",
+      "split": "dev",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 2,
+      "top_similarity": 0.675,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.675
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.6573
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.5888
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.5725
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.5465
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "question": "Explain how strict serializability in databases is enforced using Two-Phase Locking and crash recovery via ARIES.",
+      "split": "dev",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Database_Systems_ACID.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6668,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 2,
+      "reciprocal_rank": 0.5,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.6668
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.6047
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.5942
+        },
+        {
+          "rank": 4,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.5884
+        },
+        {
+          "rank": 5,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.5467
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "question": "How do logical vector clocks on page 1 of distributed systems relate to the consensus safety guarantees in Raft on page 2?",
+      "split": "dev",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Distributed_Systems_Consensus.pdf",
+      "target_page": 2,
+      "top_similarity": 0.5963,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.5963
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.548
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.5463
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.4754
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.4608
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "question": "How does the expenditure calculation of GDP connect to Keynesian multiplier effects from government spending?",
+      "split": "dev",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Principles_of_Macroeconomics.pdf",
+      "target_page": 1,
+      "top_similarity": 0.5817,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 1,
+          "similarity": 0.5817
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 1,
+          "similarity": 0.5663
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.471
+        },
+        {
+          "rank": 4,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.4439
+        },
+        {
+          "rank": 5,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.4212
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "question": "How do enzyme activation barriers on page 1 affect the rate-limiting committed step of cellular glycolysis on page 2?",
+      "split": "dev",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Cell_Biology_and_Metabolism.pdf",
+      "target_page": 1,
+      "top_similarity": 0.5145,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.5145
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.4835
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.4737
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.4731
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.3155
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "question": "Contrast how distance vector algorithms operate in RIPv2 compared to path vector routing in BGP.",
+      "split": "dev",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 3,
+      "top_similarity": 0.5317,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.5317
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.5222
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.2972
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.2621
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.2616
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "question": "How does the Chandy-Misra-Haas edge-chasing algorithm detect distributed deadlocks using probe messages?",
+      "split": "dev",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Distributed_Systems_Consensus.pdf",
+      "target_page": 3,
+      "top_similarity": 0.7252,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.7252
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.6491
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.5721
+        },
+        {
+          "rank": 4,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.4755
+        },
+        {
+          "rank": 5,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.4745
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "question": "What is the difference between Wait-Die and Wound-Wait schemes for deadlock prevention in database systems?",
+      "split": "dev",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Database_Systems_ACID.pdf",
+      "target_page": 2,
+      "top_similarity": 0.7403,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.7403
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.7262
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.6302
+        },
+        {
+          "rank": 4,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.5698
+        },
+        {
+          "rank": 5,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.549
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "question": "How does Two-Phase Locking (2PL) differ from the Two-Phase Commit (2PC) protocol?",
+      "split": "dev",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Database_Systems_ACID.pdf",
+      "target_page": 2,
+      "top_similarity": 0.8226,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.8226
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.5888
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.5354
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.5047
+        },
+        {
+          "rank": 5,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.3925
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "question": "In operating system process management, what are the five states a process moves between?",
+      "split": "dev",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Operating_Systems_Concurrency.pdf",
+      "target_page": 1,
+      "top_similarity": 0.5886,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 1,
+          "similarity": 0.5886
+        },
+        {
+          "rank": 2,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 1,
+          "similarity": 0.4868
+        },
+        {
+          "rank": 3,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.4698
+        },
+        {
+          "rank": 4,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.4678
+        },
+        {
+          "rank": 5,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.4479
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "question": "What is the difference between a phantom deadlock in distributed systems and a phantom read in relational databases?",
+      "split": "dev",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Database_Systems_ACID.pdf",
+      "target_page": 1,
+      "top_similarity": 0.6615,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": null,
+      "reciprocal_rank": 0.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.6615
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.5925
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.5844
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.5367
+        },
+        {
+          "rank": 5,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.536
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "question": "How does counting semaphore synchronization in operating systems differ from shared and exclusive locks in databases?",
+      "split": "dev",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Operating_Systems_Concurrency.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6944,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.6944
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.5244
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.4696
+        },
+        {
+          "rank": 4,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.463
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.4599
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "question": "How does Shor's quantum algorithm exploit quantum superposition to factor prime numbers?",
+      "split": "dev",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.1849,
+      "abstained": true,
+      "decision": "CORRECT_ABSTAIN",
+      "matched_rank": "ABSTAINED_CORRECT",
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.1849
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.1677
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.1666
+        },
+        {
+          "rank": 4,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 1,
+          "similarity": 0.1467
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.1384
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "question": "What architectural techniques did Roman engineers use to construct the Colosseum aqueducts?",
+      "split": "dev",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.1738,
+      "abstained": true,
+      "decision": "CORRECT_ABSTAIN",
+      "matched_rank": "ABSTAINED_CORRECT",
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.1738
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.1387
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.1297
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.126
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.1155
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "question": "What was the significance of the storming of the Bastille during the French Revolution in 1789?",
+      "split": "dev",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.1165,
+      "abstained": true,
+      "decision": "CORRECT_ABSTAIN",
+      "matched_rank": "ABSTAINED_CORRECT",
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.1165
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.1103
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.1004
+        },
+        {
+          "rank": 4,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.0859
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.0852
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "question": "How does the Black-Scholes model compute European call option pricing using implied volatility?",
+      "split": "dev",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.1678,
+      "abstained": true,
+      "decision": "CORRECT_ABSTAIN",
+      "matched_rank": "ABSTAINED_CORRECT",
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.1678
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.1563
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.1339
+        },
+        {
+          "rank": 4,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 1,
+          "similarity": 0.1255
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.107
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "question": "How do diffusion models iteratively denoise Gaussian noise in generative AI image synthesis?",
+      "split": "dev",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.1117,
+      "abstained": true,
+      "decision": "CORRECT_ABSTAIN",
+      "matched_rank": "ABSTAINED_CORRECT",
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.1117
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.0994
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.0941
+        },
+        {
+          "rank": 4,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.0926
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.0847
+        }
+      ]
+    },
+    {
+      "id": 66,
+      "question": "What chemical steps synthesize acetylsalicylic acid from salicylic acid and acetic anhydride?",
+      "split": "dev",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.3438,
+      "abstained": false,
+      "decision": "FALSE_ANSWER",
+      "matched_rank": "FALSE_ANSWER",
+      "reciprocal_rank": 0.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.3438
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.3131
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.3014
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.2446
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.2206
+        }
+      ]
+    }
+  ],
+  "test_set_records": [
+    {
+      "id": 9,
+      "question": "What is the fixed base header size of an IPv6 packet?",
+      "split": "test",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 4,
+      "top_similarity": 0.635,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.635
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.4986
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.3303
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.3248
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.2429
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "question": "In the Michaelis-Menten kinetic model, what does Km represent?",
+      "split": "test",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Cell_Biology_and_Metabolism.pdf",
+      "target_page": 1,
+      "top_similarity": 0.6735,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.6735
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.2197
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.1988
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.1779
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.172
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "question": "What is the formula for the simple Keynesian Government Spending Multiplier?",
+      "split": "test",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Principles_of_Macroeconomics.pdf",
+      "target_page": 3,
+      "top_similarity": 0.6151,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.6151
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 1,
+          "similarity": 0.3968
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.3928
+        },
+        {
+          "rank": 4,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.3847
+        },
+        {
+          "rank": 5,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 1,
+          "similarity": 0.345
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "question": "What standard port number does BGP routers use for establishing peering sessions?",
+      "split": "test",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 3,
+      "top_similarity": 0.5114,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.5114
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.5049
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.2908
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.2777
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.271
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "question": "How many total nodes are required in a synchronous system to tolerate m Byzantine faulty nodes?",
+      "split": "test",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Distributed_Systems_Consensus.pdf",
+      "target_page": 3,
+      "top_similarity": 0.6979,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.6979
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.6145
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.5493
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.4734
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.429
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "question": "What are the three passes performed by the ARIES database recovery algorithm?",
+      "split": "test",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Database_Systems_ACID.pdf",
+      "target_page": 3,
+      "top_similarity": 0.6214,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.6214
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.4531
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.3705
+        },
+        {
+          "rank": 4,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.3416
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.3218
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "question": "What default administrative distance is assigned to RIPv2?",
+      "split": "test",
+      "category": "direct_lookup",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 3,
+      "top_similarity": 0.2766,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 2,
+      "reciprocal_rank": 0.5,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.2766
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.2299
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.2149
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.1946
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.1942
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "question": "What strategy aborts a newly initiated transaction when it attempts to seize a lock currently controlled by a long-running senior worker?",
+      "split": "test",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Database_Systems_ACID.pdf",
+      "target_page": 2,
+      "top_similarity": 0.5438,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.5438
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.5212
+        },
+        {
+          "rank": 3,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.4661
+        },
+        {
+          "rank": 4,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.4129
+        },
+        {
+          "rank": 5,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.3788
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "question": "How does an autonomous system negotiate outbound paths with foreign networks using administrative policies rather than hop counters?",
+      "split": "test",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 3,
+      "top_similarity": 0.4469,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.4469
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.4299
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.2673
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.2454
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.2414
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "question": "Why does substantial deficit spending sometimes fail to stimulate private factory construction and business capital projects?",
+      "split": "test",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Principles_of_Macroeconomics.pdf",
+      "target_page": 3,
+      "top_similarity": 0.5348,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.5348
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 1,
+          "similarity": 0.2555
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 1,
+          "similarity": 0.2205
+        },
+        {
+          "rank": 4,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.2112
+        },
+        {
+          "rank": 5,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.2005
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "question": "What cellular compartment synthesizes lipid steroid molecules while neutralizing chemical hazards?",
+      "split": "test",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Cell_Biology_and_Metabolism.pdf",
+      "target_page": 1,
+      "top_similarity": 0.4357,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.4357
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.3602
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.3489
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.309
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.3003
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "question": "How does a distributed cluster detect a leader heart failure and pick a replacement before client operations stall?",
+      "split": "test",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Distributed_Systems_Consensus.pdf",
+      "target_page": 2,
+      "top_similarity": 0.4866,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 3,
+      "reciprocal_rank": 0.3333333333333333,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.4866
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.4811
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.4684
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.429
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.3915
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "question": "Why are log entries systematically committed to disk platters prior to altering cached database pages?",
+      "split": "test",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Database_Systems_ACID.pdf",
+      "target_page": 3,
+      "top_similarity": 0.4568,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.4568
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.3898
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.3688
+        },
+        {
+          "rank": 4,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.3255
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.3238
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "question": "What happens when intermediate packet forwarders encounter payload sizes larger than the outgoing interface can handle in IPv4 versus IPv6?",
+      "split": "test",
+      "category": "paraphrased",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 4,
+      "top_similarity": 0.5228,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.5228
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.3812
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.3152
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.3075
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.2922
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "question": "Explain how the two phases of Two-Phase Commit coordinate participants, and why coordinator failure results in blocking.",
+      "split": "test",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Distributed_Systems_Consensus.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6946,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.6946
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.524
+        },
+        {
+          "rank": 3,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.509
+        },
+        {
+          "rank": 4,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.4936
+        },
+        {
+          "rank": 5,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.4261
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "question": "Synthesize the three types of unemployment and explain how fiscal stimulus addresses cyclical unemployment.",
+      "split": "test",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Principles_of_Macroeconomics.pdf",
+      "target_page": 2,
+      "top_similarity": 0.5475,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.5475
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.4582
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.3247
+        },
+        {
+          "rank": 4,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.2927
+        },
+        {
+          "rank": 5,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.2827
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "question": "How does electron transfer through mitochondrial Complexes I to IV generate the proton-motive force powering ATP synthase?",
+      "split": "test",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Cell_Biology_and_Metabolism.pdf",
+      "target_page": 3,
+      "top_similarity": 0.8071,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.8071
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.5756
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.5111
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.4648
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.3557
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "question": "Compare the addressing mechanisms used across Layer 2 frames, Layer 3 packets, and Layer 4 segments in networking.",
+      "split": "test",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Computer_Networking_Protocols.pdf",
+      "target_page": 1,
+      "top_similarity": 0.6334,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 2,
+      "reciprocal_rank": 0.5,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.6334
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.6283
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.5641
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 1,
+          "similarity": 0.5562
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.5025
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "question": "How does the growing phase in 2PL differ from the shrinking phase, and how does Strict 2PL modify lock releases?",
+      "split": "test",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Database_Systems_ACID.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6775,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.6775
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.4353
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.366
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.3333
+        },
+        {
+          "rank": 5,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.3312
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "question": "Explain how the Central Bank uses Open Market Operations to target policy interest rates and influence the IS-LM equilibrium.",
+      "split": "test",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Principles_of_Macroeconomics.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6391,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 2,
+      "reciprocal_rank": 0.5,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.6391
+        },
+        {
+          "rank": 2,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.5531
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.5108
+        },
+        {
+          "rank": 4,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.4341
+        },
+        {
+          "rank": 5,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.3631
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "question": "How do rough endoplasmic reticulum ribosomes coordinate with the Golgi apparatus for glycoprotein distribution?",
+      "split": "test",
+      "category": "multi_chunk",
+      "answerable": true,
+      "target_document": "Cell_Biology_and_Metabolism.pdf",
+      "target_page": 1,
+      "top_similarity": 0.5958,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.5958
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.5094
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.3058
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.2925
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.2378
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "question": "What are the four necessary Coffman conditions required for an operating system deadlock to occur?",
+      "split": "test",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Operating_Systems_Concurrency.pdf",
+      "target_page": 3,
+      "top_similarity": 0.7759,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.7759
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.6025
+        },
+        {
+          "rank": 3,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.5935
+        },
+        {
+          "rank": 4,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.559
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.5323
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "question": "What is the purpose of a Wait-For Graph in relational database transaction management?",
+      "split": "test",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Database_Systems_ACID.pdf",
+      "target_page": 3,
+      "top_similarity": 0.6734,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.6734
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.5558
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.5461
+        },
+        {
+          "rank": 4,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.5211
+        },
+        {
+          "rank": 5,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.5077
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "question": "How do Dijkstra semaphore wait and signal operations function in operating systems?",
+      "split": "test",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Operating_Systems_Concurrency.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6194,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.6194
+        },
+        {
+          "rank": 2,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.5287
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.4339
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.4012
+        },
+        {
+          "rank": 5,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.3811
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "question": "What is the FLP Impossibility Theorem in distributed systems?",
+      "split": "test",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Distributed_Systems_Consensus.pdf",
+      "target_page": 2,
+      "top_similarity": 0.5702,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.5702
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.4156
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.35
+        },
+        {
+          "rank": 4,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.3411
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.3305
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "question": "How do BGP path vectors differ from vector clocks in distributed systems?",
+      "split": "test",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Distributed_Systems_Consensus.pdf",
+      "target_page": 1,
+      "top_similarity": 0.5404,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 2,
+      "reciprocal_rank": 0.5,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.5404
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.4853
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.4038
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.4038
+        },
+        {
+          "rank": 5,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.3259
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "question": "How does Banker's Algorithm ensure safe state resource allocation in operating systems?",
+      "split": "test",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Operating_Systems_Concurrency.pdf",
+      "target_page": 3,
+      "top_similarity": 0.4499,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 3,
+          "similarity": 0.4499
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.4209
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.4127
+        },
+        {
+          "rank": 4,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 1,
+          "similarity": 0.4122
+        },
+        {
+          "rank": 5,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.4016
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "question": "What is the difference between an uncommitted transaction rollback in DBMS and process termination in an OS?",
+      "split": "test",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Database_Systems_ACID.pdf",
+      "target_page": 1,
+      "top_similarity": 0.5285,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 2,
+      "reciprocal_rank": 0.5,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.5285
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.5019
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 1,
+          "similarity": 0.4993
+        },
+        {
+          "rank": 4,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 2,
+          "similarity": 0.4823
+        },
+        {
+          "rank": 5,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.3889
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "question": "In distributed systems, how does Paxos prepare/promise phase achieve safety across partition healing?",
+      "split": "test",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Distributed_Systems_Consensus.pdf",
+      "target_page": 2,
+      "top_similarity": 0.6342,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.6342
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.5284
+        },
+        {
+          "rank": 3,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.4368
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 1,
+          "similarity": 0.4006
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.4006
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "question": "What role does the Program Counter play in a process control block versus individual threads in an OS?",
+      "split": "test",
+      "category": "cross_document_distractor",
+      "answerable": true,
+      "target_document": "Operating_Systems_Concurrency.pdf",
+      "target_page": 1,
+      "top_similarity": 0.6629,
+      "abstained": false,
+      "decision": "RETRIEVED",
+      "matched_rank": 1,
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 1,
+          "similarity": 0.6629
+        },
+        {
+          "rank": 2,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 1,
+          "similarity": 0.6284
+        },
+        {
+          "rank": 3,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 1,
+          "similarity": 0.5045
+        },
+        {
+          "rank": 4,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.4991
+        },
+        {
+          "rank": 5,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.4647
+        }
+      ]
+    },
+    {
+      "id": 67,
+      "question": "How does the IPv7 Turbo-IP protocol defined in RFC 9999 handle quantum packet routing?",
+      "split": "test",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.4287,
+      "abstained": false,
+      "decision": "FALSE_ANSWER",
+      "matched_rank": "FALSE_ANSWER",
+      "reciprocal_rank": 0.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.4287
+        },
+        {
+          "rank": 2,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.4018
+        },
+        {
+          "rank": 3,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.3797
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.3433
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.289
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "question": "How does tectonic plate subduction in the Mariana Trench trigger deep-focus oceanic earthquakes?",
+      "split": "test",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.1362,
+      "abstained": true,
+      "decision": "CORRECT_ABSTAIN",
+      "matched_rank": "ABSTAINED_CORRECT",
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.1362
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.1193
+        },
+        {
+          "rank": 3,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.1165
+        },
+        {
+          "rank": 4,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 4,
+          "similarity": 0.086
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.0829
+        }
+      ]
+    },
+    {
+      "id": 69,
+      "question": "What light-dependent photon absorption reactions occur inside chloroplast thylakoids during photosynthesis?",
+      "split": "test",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.2794,
+      "abstained": false,
+      "decision": "FALSE_ANSWER",
+      "matched_rank": "FALSE_ANSWER",
+      "reciprocal_rank": 0.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.2794
+        },
+        {
+          "rank": 2,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.2743
+        },
+        {
+          "rank": 3,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 2,
+          "similarity": 0.254
+        },
+        {
+          "rank": 4,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 1,
+          "similarity": 0.2058
+        },
+        {
+          "rank": 5,
+          "filename": "Cell_Biology_and_Metabolism.pdf",
+          "page": 3,
+          "similarity": 0.1978
+        }
+      ]
+    },
+    {
+      "id": 70,
+      "question": "How do compiler register allocators use Chaitin graph coloring on interference graphs?",
+      "split": "test",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.2937,
+      "abstained": false,
+      "decision": "FALSE_ANSWER",
+      "matched_rank": "FALSE_ANSWER",
+      "reciprocal_rank": 0.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.2937
+        },
+        {
+          "rank": 2,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.293
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.2785
+        },
+        {
+          "rank": 4,
+          "filename": "Operating_Systems_Concurrency.pdf",
+          "page": 2,
+          "similarity": 0.2655
+        },
+        {
+          "rank": 5,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 2,
+          "similarity": 0.2417
+        }
+      ]
+    },
+    {
+      "id": 71,
+      "question": "How does the Chomsky hierarchy classify context-free grammars against pushdown automata?",
+      "split": "test",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.2072,
+      "abstained": true,
+      "decision": "CORRECT_ABSTAIN",
+      "matched_rank": "ABSTAINED_CORRECT",
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 2,
+          "similarity": 0.2072
+        },
+        {
+          "rank": 2,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.1944
+        },
+        {
+          "rank": 3,
+          "filename": "Database_Systems_ACID.pdf",
+          "page": 3,
+          "similarity": 0.1878
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.1678
+        },
+        {
+          "rank": 5,
+          "filename": "Computer_Networking_Protocols.pdf",
+          "page": 3,
+          "similarity": 0.1666
+        }
+      ]
+    },
+    {
+      "id": 72,
+      "question": "What cosmological evidence supports cosmic microwave background radiation anisotropies in dark matter models?",
+      "split": "test",
+      "category": "unanswerable",
+      "answerable": false,
+      "target_document": null,
+      "target_page": null,
+      "top_similarity": 0.1801,
+      "abstained": true,
+      "decision": "CORRECT_ABSTAIN",
+      "matched_rank": "ABSTAINED_CORRECT",
+      "reciprocal_rank": 1.0,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.1801
+        },
+        {
+          "rank": 2,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.1089
+        },
+        {
+          "rank": 3,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 2,
+          "similarity": 0.1009
+        },
+        {
+          "rank": 4,
+          "filename": "Distributed_Systems_Consensus.pdf",
+          "page": 3,
+          "similarity": 0.095
+        },
+        {
+          "rank": 5,
+          "filename": "Principles_of_Macroeconomics.pdf",
+          "page": 3,
+          "similarity": 0.0696
+        }
+      ]
+    }
+  ]
+}

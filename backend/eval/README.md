@@ -40,9 +40,12 @@ The golden dataset contains **72 curated evaluation queries** partitioned into t
 - **Hit@1 / Hit@3 / Hit@5:** Fraction of answerable queries where the correct source document and page are retrieved within the top 1, 3, or 5 candidates.
 - **Mean Reciprocal Rank (MRR):** Average reciprocal rank ($1 / \text{rank}$) of the first relevant chunk.
 - **Per-Category Breakdown:** Granular Hit@K and MRR reported individually across the 5 query categories.
-- **No-Answer Abstention Accuracy:** Evaluates the cosine similarity threshold $\tau$:
-  - Correctly abstains on unanswerable queries (true negative rate).
-  - Avoids false rejections on answerable queries (low false positive rate).
+- **Abstention Metrics (Out-of-Domain Detection):**
+  - **Abstention Recall:** $\frac{\text{Correct Abstentions}}{\text{Total Unanswerable Queries}}$ (identifies out-of-domain queries).
+  - **Abstention Precision:** $\frac{\text{Correct Abstentions}}{\text{Total Abstention Decisions}}$ (minimizes false rejections on answerable queries).
+  - **False-Answer Rate:** $\frac{\text{Unanswerable Queries Not Abstained}}{\text{Total Unanswerable Queries}}$ ($1 - \text{Recall}$).
+  - **Overall abstention decision accuracy (answerable + unanswerable):** $\frac{\text{Correct Abstentions} + \text{Retained Answerable}}{\text{Total Queries}}$.
+- **Wilson 95% Confidence Intervals:** Computed for all proportional metrics to quantify statistical variance given small sample sizes ($n=36$).
 - **Latency:** Average end-to-end retrieval time in milliseconds.
 
 ---
@@ -53,4 +56,17 @@ To run the offline, deterministic benchmark:
 ```bash
 python -m eval.run
 ```
-Outputs are printed to the terminal and recorded in `backend/eval/results.md`.
+Outputs are printed to the terminal and recorded in `backend/eval/results.md`. Detailed per-query ranks verifying MRR distributions are saved to `backend/eval/per_query_results.json`.
+
+---
+
+## 5. Important Disclosures & Methodology Limitations
+
+1. **Synthetic and AI-Authored Corpus & Golden Set:**  
+   All 6 documents in `sample_docs/` and all 72 evaluation questions in `golden_dataset.json` are **synthetic and AI-authored** using ReportLab and open educational curriculum guides. While they model real undergraduate computer science, economics, and biology notes, they reflect synthetic phrasing patterns and do not represent organic human student queries or diverse messy PDF scans.
+
+2. **Retrieval-Only Scope:**  
+   This evaluation harness is **strictly retrieval-only**. It benchmarks chunking granularity, semantic embedding separation, vector similarity ranking, and cosine abstention thresholds. It does **not** evaluate LLM synthesis fidelity, hallucination rates, or end-to-end generative answer formatting.
+
+3. **Test Set Contamination Caveat:**  
+   The held-out test set is evaluated strictly once during the initial benchmark run to provide unbiased generalization scores. However, **once failure cases (such as the 5 case studies analyzed in `results.md`) are examined by engineers and used to design architectural fixes (e.g., hybrid BM25, table linearizers, or synonym query expanders), the test set is no longer untouched**. Any subsequent evaluation cycle attempting to measure improvements on those fixes must introduce a freshly sampled test set to maintain true statistical independence.
