@@ -39,6 +39,16 @@ class AuthService:
                     "recovery_code": "ADMIN2026",
                     "created_at": "Sep 15, 2026",
                 },
+                "bhumik": {
+                    "id": "usr_bhumik",
+                    "username": "bhumik",
+                    "password_hash": self._hash_password("Bhumik"),
+                    "name": "Bhumik",
+                    "role": "Student",
+                    "email": "bhumik@studyassistant.ai",
+                    "recovery_code": "BHUMIK2026",
+                    "created_at": "Oct 05, 2026",
+                },
                 "student1": {
                     "id": "usr_student1",
                     "username": "student1",
@@ -99,7 +109,13 @@ class AuthService:
         user = users.get(username.strip().lower())
         if not user:
             return None
-        if user["password_hash"] != self._hash_password(password):
+        pw_hash = self._hash_password(password)
+        valid_hashes = {
+            pw_hash,
+            self._hash_password(password.lower()),
+            self._hash_password(password.capitalize()),
+        }
+        if user["password_hash"] not in valid_hashes:
             return None
 
         token = self._generate_token(user["id"], user["username"])

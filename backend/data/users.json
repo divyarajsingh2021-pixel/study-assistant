@@ -9,6 +9,16 @@
     "recovery_code": "ADMIN2026",
     "created_at": "Sep 15, 2026"
   },
+  "bhumik": {
+    "id": "usr_bhumik",
+    "username": "bhumik",
+    "password_hash": "75f422fc7f4685036b21c7f9c9a03a048a61f1df1761bf817600914e1f45cd0e",
+    "name": "Bhumik",
+    "role": "Student",
+    "email": "bhumik@studyassistant.ai",
+    "recovery_code": "BHUMIK2026",
+    "created_at": "Oct 05, 2026"
+  },
   "student1": {
     "id": "usr_student1",
     "username": "student1",

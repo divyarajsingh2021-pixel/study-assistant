@@ -13,6 +13,18 @@ def test_auth_service_invalid_login():
     assert user is None
 
 
+def test_bhumik_login():
+    user_cap = auth_service.authenticate_user("Bhumik", "Bhumik")
+    assert user_cap is not None
+    assert user_cap["role"] == "Student"
+    assert user_cap["username"] == "bhumik"
+
+    # Case-tolerant password check
+    user_lower = auth_service.authenticate_user("bhumik", "bhumik")
+    assert user_lower is not None
+    assert user_lower["username"] == "bhumik"
+
+
 def test_token_validation():
     user = auth_service.authenticate_user("student1", "study123")
     assert user is not None
