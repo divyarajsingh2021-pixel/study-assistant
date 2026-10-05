@@ -25,73 +25,96 @@ class AuthService:
 
     def _init_users_store(self):
         """
-        Seeds 5 default pre-configured accounts if users.json does not exist.
+        Seeds default pre-configured accounts.
+        - If users.json does not exist, creates it with all defaults.
+        - If users.json exists, ensures pinned accounts (admin, bhumik, etc.)
+          are always merged in so they survive Render ephemeral-disk resets.
         """
+        # All pinned accounts that must always exist
+        pinned_users = {
+            "admin": {
+                "id": "usr_admin",
+                "username": "admin",
+                "password_hash": self._hash_password("admin123"),
+                "name": "Administrator",
+                "role": "Admin",
+                "email": "admin@studyassistant.ai",
+                "recovery_code": "ADMIN2026",
+                "created_at": "Sep 15, 2026",
+            },
+            "bhumik": {
+                "id": "usr_bhumik",
+                "username": "bhumik",
+                "password_hash": self._hash_password("Bhumik"),
+                "name": "Bhumik",
+                "role": "Student",
+                "email": "bhumik@studyassistant.ai",
+                "recovery_code": "BHUMIK2026",
+                "created_at": "Oct 05, 2026",
+            },
+            "student1": {
+                "id": "usr_student1",
+                "username": "student1",
+                "password_hash": self._hash_password("study123"),
+                "name": "Alex Turner",
+                "role": "Student",
+                "email": "alex@studyassistant.ai",
+                "recovery_code": "STUDENT1",
+                "created_at": "Sep 15, 2026",
+            },
+            "student2": {
+                "id": "usr_student2",
+                "username": "student2",
+                "password_hash": self._hash_password("study123"),
+                "name": "Maya Patel",
+                "role": "Student",
+                "email": "maya@studyassistant.ai",
+                "recovery_code": "STUDENT2",
+                "created_at": "Sep 15, 2026",
+            },
+            "student3": {
+                "id": "usr_student3",
+                "username": "student3",
+                "password_hash": self._hash_password("study123"),
+                "name": "Liam Johnson",
+                "role": "Student",
+                "email": "liam@studyassistant.ai",
+                "recovery_code": "STUDENT3",
+                "created_at": "Sep 15, 2026",
+            },
+            "teacher1": {
+                "id": "usr_teacher1",
+                "username": "teacher1",
+                "password_hash": self._hash_password("teach123"),
+                "name": "Prof. Sharma",
+                "role": "Faculty",
+                "email": "sharma@studyassistant.ai",
+                "recovery_code": "TEACHER1",
+                "created_at": "Sep 15, 2026",
+            },
+        }
+
         if not self.users_file.exists():
-            default_users = {
-                "admin": {
-                    "id": "usr_admin",
-                    "username": "admin",
-                    "password_hash": self._hash_password("admin123"),
-                    "name": "Administrator",
-                    "role": "Admin",
-                    "email": "admin@studyassistant.ai",
-                    "recovery_code": "ADMIN2026",
-                    "created_at": "Sep 15, 2026",
-                },
-                "bhumik": {
-                    "id": "usr_bhumik",
-                    "username": "bhumik",
-                    "password_hash": self._hash_password("Bhumik"),
-                    "name": "Bhumik",
-                    "role": "Student",
-                    "email": "bhumik@studyassistant.ai",
-                    "recovery_code": "BHUMIK2026",
-                    "created_at": "Oct 05, 2026",
-                },
-                "student1": {
-                    "id": "usr_student1",
-                    "username": "student1",
-                    "password_hash": self._hash_password("study123"),
-                    "name": "Alex Turner",
-                    "role": "Student",
-                    "email": "alex@studyassistant.ai",
-                    "recovery_code": "STUDENT1",
-                    "created_at": "Sep 15, 2026",
-                },
-                "student2": {
-                    "id": "usr_student2",
-                    "username": "student2",
-                    "password_hash": self._hash_password("study123"),
-                    "name": "Maya Patel",
-                    "role": "Student",
-                    "email": "maya@studyassistant.ai",
-                    "recovery_code": "STUDENT2",
-                    "created_at": "Sep 15, 2026",
-                },
-                "student3": {
-                    "id": "usr_student3",
-                    "username": "student3",
-                    "password_hash": self._hash_password("study123"),
-                    "name": "Liam Johnson",
-                    "role": "Student",
-                    "email": "liam@studyassistant.ai",
-                    "recovery_code": "STUDENT3",
-                    "created_at": "Sep 15, 2026",
-                },
-                "teacher1": {
-                    "id": "usr_teacher1",
-                    "username": "teacher1",
-                    "password_hash": self._hash_password("teach123"),
-                    "name": "Prof. Sharma",
-                    "role": "Faculty",
-                    "email": "sharma@studyassistant.ai",
-                    "recovery_code": "TEACHER1",
-                    "created_at": "Sep 15, 2026",
-                },
-            }
+            # Fresh install: write all pinned accounts
             with open(self.users_file, "w", encoding="utf-8") as f:
-                json.dump(default_users, f, indent=2)
+                json.dump(pinned_users, f, indent=2)
+        else:
+            # File already exists: load it and inject any missing pinned accounts
+            try:
+                with open(self.users_file, encoding="utf-8") as f:
+                    existing = json.load(f)
+            except Exception:
+                existing = {}
+
+            changed = False
+            for key, user in pinned_users.items():
+                if key not in existing:
+                    existing[key] = user
+                    changed = True
+
+            if changed:
+                with open(self.users_file, "w", encoding="utf-8") as f:
+                    json.dump(existing, f, indent=2)
 
     def _read_users(self) -> dict[str, Any]:
         try:
