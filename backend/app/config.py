@@ -39,6 +39,7 @@ class AppSettings(BaseSettings):
         "http://127.0.0.1:5173",
         "http://localhost:80",
         "http://localhost",
+        "https://study-assistant-sooty.vercel.app",
     ]
     max_upload_size_bytes: int = 25 * 1024 * 1024  # 25MB
     rate_limit_default: str = "120/minute"
