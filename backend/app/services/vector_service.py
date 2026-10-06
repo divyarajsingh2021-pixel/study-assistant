@@ -79,7 +79,9 @@ class SimpleVectorStore:
         self._save()
 
     def delete(self, document_id: str) -> None:
-        self._chunks = [c for c in self._chunks if c.get("meta", {}).get("document_id") != document_id]
+        self._chunks = [
+            c for c in self._chunks if c.get("meta", {}).get("document_id") != document_id
+        ]
         self._rebuild_idf()
         self._save()
 
@@ -95,7 +97,9 @@ class SimpleVectorStore:
 
         # Filter by ownership
         if document_id:
-            candidates = [c for c in candidates if c.get("meta", {}).get("document_id") == document_id]
+            candidates = [
+                c for c in candidates if c.get("meta", {}).get("document_id") == document_id
+            ]
         elif user_id and not is_admin:
             candidates = [c for c in candidates if c.get("meta", {}).get("user_id") == user_id]
 
