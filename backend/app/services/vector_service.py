@@ -382,6 +382,12 @@ class VectorService:
         is_admin: bool = False,
         n_results: int = 5,
     ) -> list[dict[str, Any]]:
+        # When a specific document is requested, verify ownership first
+        if document_id:
+            doc = self.get_document_by_id(document_id, user_id=user_id, is_admin=is_admin)
+            if not doc:
+                return []
+
         results = self.store.query(
             query_text=query,
             n_results=n_results,
