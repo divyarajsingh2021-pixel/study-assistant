@@ -1,14 +1,11 @@
 import io
 
-import chromadb
 import pytest
 from app.config import settings
 from app.main import app
 from app.services.auth_service import auth_service
 from app.services.llm_service import llm_service
-from app.services.vector_service import vector_service
-from chromadb.config import Settings as ChromaSettings
-from chromadb.utils import embedding_functions
+from app.services.vector_service import SimpleVectorStore, vector_service
 from fastapi.testclient import TestClient
 
 
@@ -16,36 +13,27 @@ from fastapi.testclient import TestClient
 def isolated_storage(tmp_path, monkeypatch):
     """
     Ensures every test runs against an isolated, clean temporary directory
-    for ChromaDB, metadata JSON, and users JSON.
+    for the vector store, metadata JSON, and users JSON.
     """
     temp_data = tmp_path / "data"
-    temp_chroma = temp_data / "chroma"
     temp_uploads = temp_data / "uploads"
     temp_users = temp_data / "users.json"
     temp_docs_meta = temp_data / "documents_meta.json"
     temp_stats = temp_data / "stats.json"
+    temp_chunks = temp_data / "chunks.json"
 
     temp_data.mkdir(parents=True, exist_ok=True)
-    temp_chroma.mkdir(parents=True, exist_ok=True)
     temp_uploads.mkdir(parents=True, exist_ok=True)
 
     # Monkeypatch paths on singleton services
     monkeypatch.setattr(vector_service, "data_dir", temp_data)
-    monkeypatch.setattr(vector_service, "chroma_dir", temp_chroma)
     monkeypatch.setattr(vector_service, "docs_meta_file", temp_docs_meta)
     monkeypatch.setattr(vector_service, "stats_file", temp_stats)
+    monkeypatch.setattr(vector_service, "chunks_file", temp_chunks)
 
-    # Reinitialize isolated ChromaDB in temporary directory
-    temp_client = chromadb.PersistentClient(
-        path=str(temp_chroma), settings=ChromaSettings(anonymized_telemetry=False)
-    )
-    temp_collection = temp_client.get_or_create_collection(
-        name="test_collection",
-        embedding_function=embedding_functions.DefaultEmbeddingFunction(),
-        metadata={"hnsw:space": "cosine"},
-    )
-    monkeypatch.setattr(vector_service, "chroma_client", temp_client)
-    monkeypatch.setattr(vector_service, "collection", temp_collection)
+    # Reinitialize isolated vector store in temporary directory
+    temp_store = SimpleVectorStore(temp_chunks)
+    monkeypatch.setattr(vector_service, "store", temp_store)
     vector_service._init_storage()
 
     # Reinitialize auth service in temporary directory
@@ -60,7 +48,6 @@ def isolated_storage(tmp_path, monkeypatch):
 
     yield {
         "data_dir": temp_data,
-        "chroma_dir": temp_chroma,
         "uploads_dir": temp_uploads,
         "users_file": temp_users,
     }

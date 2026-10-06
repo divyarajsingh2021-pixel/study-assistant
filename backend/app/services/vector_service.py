@@ -1,28 +1,152 @@
 import json
+import math
 import re
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
-import chromadb
 import httpx
-from app.config import CHROMA_DIR, DATA_DIR, settings
-from chromadb.config import Settings as ChromaSettings
-from chromadb.utils import embedding_functions
+from app.config import DATA_DIR, settings
 
 DOCS_META_FILE = DATA_DIR / "documents_meta.json"
 STATS_FILE = DATA_DIR / "stats.json"
+CHUNKS_FILE = DATA_DIR / "chunks.json"
+
+
+# ---------------------------------------------------------------------------
+# Lightweight pure-Python vector store (TF-IDF cosine similarity)
+# Replaces chromadb to avoid C++ build failures on Render free tier
+# ---------------------------------------------------------------------------
+
+
+def _tokenize(text: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+", text.lower())
+
+
+def _tfidf_vector(tokens: list[str], idf: dict[str, float]) -> dict[str, float]:
+    tf = Counter(tokens)
+    total = len(tokens) or 1
+    return {t: (count / total) * idf.get(t, 1.0) for t, count in tf.items()}
+
+
+def _cosine_similarity(a: dict[str, float], b: dict[str, float]) -> float:
+    dot = sum(a.get(t, 0.0) * b.get(t, 0.0) for t in b)
+    mag_a = math.sqrt(sum(v * v for v in a.values())) or 1.0
+    mag_b = math.sqrt(sum(v * v for v in b.values())) or 1.0
+    return dot / (mag_a * mag_b)
+
+
+class SimpleVectorStore:
+    """
+    File-backed TF-IDF vector store.
+    Stores chunks as a list in chunks.json on disk.
+    """
+
+    def __init__(self, chunks_file: Path):
+        self.chunks_file = chunks_file
+        self._chunks: list[dict[str, Any]] = []
+        self._idf: dict[str, float] = {}
+        self._load()
+
+    def _load(self):
+        if self.chunks_file.exists():
+            try:
+                with open(self.chunks_file, encoding="utf-8") as f:
+                    self._chunks = json.load(f)
+                self._rebuild_idf()
+            except Exception:
+                self._chunks = []
+
+    def _save(self):
+        with open(self.chunks_file, "w", encoding="utf-8") as f:
+            json.dump(self._chunks, f)
+
+    def _rebuild_idf(self):
+        df: Counter = Counter()
+        N = len(self._chunks) or 1
+        for chunk in self._chunks:
+            tokens = set(_tokenize(chunk.get("text", "")))
+            for t in tokens:
+                df[t] += 1
+        self._idf = {t: math.log(N / (1 + cnt)) + 1.0 for t, cnt in df.items()}
+
+    def add(self, ids: list[str], documents: list[str], metadatas: list[dict]) -> None:
+        existing_ids = {c["id"] for c in self._chunks}
+        for chunk_id, text, meta in zip(ids, documents, metadatas, strict=False):
+            if chunk_id not in existing_ids:
+                self._chunks.append({"id": chunk_id, "text": text, "meta": meta})
+        self._rebuild_idf()
+        self._save()
+
+    def delete(self, document_id: str) -> None:
+        self._chunks = [c for c in self._chunks if c.get("meta", {}).get("document_id") != document_id]
+        self._rebuild_idf()
+        self._save()
+
+    def query(
+        self,
+        query_text: str,
+        n_results: int = 5,
+        document_id: str | None = None,
+        user_id: str | None = None,
+        is_admin: bool = False,
+    ) -> list[dict[str, Any]]:
+        candidates = self._chunks
+
+        # Filter by ownership
+        if document_id:
+            candidates = [c for c in candidates if c.get("meta", {}).get("document_id") == document_id]
+        elif user_id and not is_admin:
+            candidates = [c for c in candidates if c.get("meta", {}).get("user_id") == user_id]
+
+        if not candidates:
+            return []
+
+        q_tokens = _tokenize(query_text)
+        q_vec = _tfidf_vector(q_tokens, self._idf)
+
+        scored = []
+        for chunk in candidates:
+            c_tokens = _tokenize(chunk.get("text", ""))
+            c_vec = _tfidf_vector(c_tokens, self._idf)
+            sim = _cosine_similarity(q_vec, c_vec)
+            scored.append((sim, chunk))
+
+        scored.sort(key=lambda x: x[0], reverse=True)
+        return [
+            {
+                "text": c["text"],
+                "similarity": round(sim, 4),
+                "meta": c.get("meta", {}),
+            }
+            for sim, c in scored[:n_results]
+        ]
+
+    def get_chunks_for_doc(self, document_id: str) -> list[dict]:
+        return sorted(
+            [c for c in self._chunks if c.get("meta", {}).get("document_id") == document_id],
+            key=lambda c: c.get("meta", {}).get("chunk_index", 0),
+        )
+
+    def count(self) -> int:
+        return len(self._chunks)
+
+
+# ---------------------------------------------------------------------------
+# VectorService — same public API as before, now backed by SimpleVectorStore
+# ---------------------------------------------------------------------------
 
 
 class VectorService:
     def __init__(self, data_dir: Path | None = None, chroma_dir: Path | None = None):
         self.data_dir = data_dir or DATA_DIR
-        self.chroma_dir = chroma_dir or CHROMA_DIR
+        # chroma_dir kept for signature compatibility; not used
+        self.data_dir.mkdir(parents=True, exist_ok=True)
         self.docs_meta_file = self.data_dir / "documents_meta.json"
         self.stats_file = self.data_dir / "stats.json"
-        self.data_dir.mkdir(parents=True, exist_ok=True)
-        self.chroma_dir.mkdir(parents=True, exist_ok=True)
+        self.chunks_file = self.data_dir / "chunks.json"
         self._init_storage()
-        self._init_chroma()
+        self.store = SimpleVectorStore(self.chunks_file)
         self._migrate_existing_docs()
 
     def _init_storage(self):
@@ -45,10 +169,6 @@ class VectorService:
                 )
 
     def _migrate_existing_docs(self):
-        """
-        Ensures existing legacy documents have user_id and username (default to admin)
-        so no existing data is lost or broken.
-        """
         try:
             with open(self.docs_meta_file, encoding="utf-8") as f:
                 data = json.load(f)
@@ -63,18 +183,6 @@ class VectorService:
                     json.dump(data, f, indent=2)
         except Exception as e:
             print(f"Error migrating docs metadata: {e}")
-
-    def _init_chroma(self):
-        self.chroma_client = chromadb.PersistentClient(
-            path=str(self.chroma_dir), settings=ChromaSettings(anonymized_telemetry=False)
-        )
-        self.default_ef = embedding_functions.DefaultEmbeddingFunction()
-
-        self.collection = self.chroma_client.get_or_create_collection(
-            name=settings.chroma_collection_name,
-            embedding_function=self.default_ef,
-            metadata={"hnsw:space": "cosine"},
-        )
 
     def _split_into_chunks(self, text: str, chunk_size: int = 800, overlap: int = 150) -> list[str]:
         paragraphs = text.split("\n\n")
@@ -117,6 +225,7 @@ class VectorService:
         return [c.strip() for c in chunks if len(c.strip()) > 30]
 
     async def _get_ollama_embeddings(self, texts: list[str]) -> list[list[float]] | None:
+        """Try to get Ollama embeddings; return None if unavailable (graceful fallback)."""
         try:
             embeddings = []
             async with httpx.AsyncClient(timeout=1.5) as client:
@@ -142,9 +251,9 @@ class VectorService:
         user_id: str = "usr_admin",
         username: str = "admin",
     ) -> int:
-        all_chunks = []
-        ids = []
-        metadatas = []
+        all_chunks: list[str] = []
+        ids: list[str] = []
+        metadatas: list[dict] = []
         chunk_idx = 0
 
         for page_info in pages_data:
@@ -183,13 +292,7 @@ class VectorService:
             )
             chunk_idx = 1
 
-        ollama_embs = await self._get_ollama_embeddings(all_chunks)
-        if ollama_embs and len(ollama_embs) == len(all_chunks):
-            self.collection.add(
-                ids=ids, documents=all_chunks, embeddings=ollama_embs, metadatas=metadatas
-            )
-        else:
-            self.collection.add(ids=ids, documents=all_chunks, metadatas=metadatas)
+        self.store.add(ids=ids, documents=all_chunks, metadatas=metadatas)
 
         self._save_document_meta(
             doc_id,
@@ -254,10 +357,7 @@ class VectorService:
         if not doc:
             return False
 
-        try:
-            self.collection.delete(where={"document_id": doc_id})
-        except Exception as e:
-            print(f"Error deleting from Chroma: {e}")
+        self.store.delete(document_id=doc_id)
 
         try:
             with open(self.docs_meta_file, encoding="utf-8") as f:
@@ -278,47 +378,25 @@ class VectorService:
         is_admin: bool = False,
         n_results: int = 5,
     ) -> list[dict[str, Any]]:
-        where_filter = None
-        if document_id:
-            doc = self.get_document_by_id(document_id, user_id=user_id, is_admin=is_admin)
-            if not doc:
-                return []
-            where_filter = {"document_id": document_id}
-        elif user_id and not is_admin:
-            where_filter = {"user_id": user_id}
-
-        query_embs = await self._get_ollama_embeddings([query])
-        if query_embs:
-            results = self.collection.query(
-                query_embeddings=query_embs, n_results=n_results, where=where_filter
-            )
-        else:
-            results = self.collection.query(
-                query_texts=[query], n_results=n_results, where=where_filter
-            )
-
-        output = []
-        if results and results.get("documents") and len(results["documents"]) > 0:
-            docs = results["documents"][0]
-            metas = results["metadatas"][0] if results.get("metadatas") else []
-            distances = results["distances"][0] if results.get("distances") else []
-
-            for i, doc_text in enumerate(docs):
-                meta = metas[i] if i < len(metas) else {}
-                dist = distances[i] if i < len(distances) else 0.0
-                similarity = round(max(0.0, 1.0 - float(dist)), 4) if dist is not None else 0.85
-                output.append(
-                    {
-                        "text": doc_text,
-                        "document_id": meta.get("document_id", ""),
-                        "filename": meta.get("filename", "Unknown Document"),
-                        "page": meta.get("page", 1),
-                        "chunk_index": meta.get("chunk_index", 0),
-                        "similarity": similarity,
-                        "user_id": meta.get("user_id", ""),
-                    }
-                )
-        return output
+        results = self.store.query(
+            query_text=query,
+            n_results=n_results,
+            document_id=document_id,
+            user_id=user_id,
+            is_admin=is_admin,
+        )
+        return [
+            {
+                "text": r["text"],
+                "document_id": r["meta"].get("document_id", ""),
+                "filename": r["meta"].get("filename", "Unknown Document"),
+                "page": r["meta"].get("page", 1),
+                "chunk_index": r["meta"].get("chunk_index", 0),
+                "similarity": r["similarity"],
+                "user_id": r["meta"].get("user_id", ""),
+            }
+            for r in results
+        ]
 
     def get_document_full_text(
         self, doc_id: str, user_id: str | None = None, is_admin: bool = False
@@ -326,29 +404,14 @@ class VectorService:
         doc = self.get_document_by_id(doc_id, user_id=user_id, is_admin=is_admin)
         if not doc:
             return ""
-
-        try:
-            results = self.collection.get(
-                where={"document_id": doc_id}, include=["documents", "metadatas"]
-            )
-            if not results or not results.get("documents"):
-                return ""
-
-            combined = []
-            for doc_chunk, meta in zip(results["documents"], results["metadatas"], strict=False):
-                combined.append((meta.get("chunk_index", 0), doc_chunk))
-            combined.sort(key=lambda x: x[0])
-            return "\n\n".join(item[1] for item in combined)
-        except Exception as e:
-            print(f"Error fetching full text: {e}")
-            return ""
+        chunks = self.store.get_chunks_for_doc(doc_id)
+        return "\n\n".join(c["text"] for c in chunks)
 
     def _read_stats_raw(self) -> dict[str, Any]:
         try:
             with open(self.stats_file, encoding="utf-8") as f:
                 raw = json.load(f)
             if "users" not in raw:
-                # Migrate legacy flat stats
                 legacy_tests = raw.get("tests_taken", 0)
                 legacy_sum = raw.get("total_score_sum", 0)
                 legacy_ans = raw.get("total_questions_answered", 0)
@@ -434,7 +497,6 @@ class VectorService:
     def record_test_result(self, score: int, total_questions: int, user_id: str = "usr_admin"):
         try:
             stats = self._read_stats_raw()
-            # Update global
             g = stats.setdefault(
                 "global",
                 {
@@ -448,7 +510,6 @@ class VectorService:
             g["total_score_sum"] = g.get("total_score_sum", 0) + score
             g["total_questions_answered"] = g.get("total_questions_answered", 0) + total_questions
 
-            # Update per-user
             users_dict = stats.setdefault("users", {})
             u = users_dict.setdefault(
                 user_id,
